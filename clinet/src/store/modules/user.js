@@ -3,7 +3,7 @@ import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
 
 const state = {
-  token: getToken(),
+  token: getToken(), // 由 cookie 获取 token
   name: '',
   avatar: '',
   introduction: '',
@@ -29,11 +29,11 @@ const mutations = {
 }
 
 const actions = {
-  // user login
+  // user login 在登录时调用
   login({ commit }, userInfo) {
-    const { username, password } = userInfo
+    const { account, password } = userInfo
     return new Promise((resolve, reject) => {
-      login({ username: username.trim(), password: password }).then(response => {
+      login({ account: account.trim(), password: password }).then(response => {
         const { data } = response
         commit('SET_TOKEN', data.token)
         setToken(data.token)
@@ -44,19 +44,19 @@ const actions = {
     })
   },
 
-  // get user info
+  // get user info 在获取用户信息时调用，向 store 中写入信息
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
         const { data } = response
 
         if (!data) {
-          reject('Verification failed, please Login again.')
+          reject('Token 验证失败，轻重新登录。')
         }
 
         const { roles, name, avatar, introduction } = data
 
-        // roles must be a non-empty array
+        // 服务器端返回的角色必须是一个数组
         if (!roles || roles.length <= 0) {
           reject('getInfo: roles must be a non-null array!')
         }
