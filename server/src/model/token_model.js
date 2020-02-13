@@ -1,5 +1,5 @@
 const db = require("../db/index")
-const { DataTypes, Model } = require("sequelize")
+const { Model } = require("sequelize")
 const { sysConfig } = require("../config")
 const User = require("./user_model")
 const { getToken } = require("../utils/jwt")
