@@ -149,7 +149,7 @@ export default {
       registerMode: false,
       capsTooltip: false,
       loading: false,
-      redirect: undefined,
+      redirect: undefined, // redirect 负责获取用户被跳转到登录页面前的页面，可以让用户登录后直接访问到想要访问的页面
       otherQuery: {}
     }
   },
@@ -216,12 +216,13 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          // TODO: register
           register({
             account: this.loginForm.account,
             password: this.loginForm.password
-          }).then(res => {
-            console.log(res)
+          }).then(() => {
+            this.$message({ message: '注册成功', type: 'success' })
+            this.loading = false
+            this.registerMode = false
           })
         } else {
           console.log('error submit!!')

@@ -1,12 +1,10 @@
-import Cookies from 'js-cookie'
-
-const TokenKey = 'Admin-Token'
+const TokenKey = 'token'
 
 /**
  * 获取 Cookie 中存放的 Token
  */
 export function getToken() {
-  return Cookies.get(TokenKey)
+  return window.localStorage.getItem(TokenKey)
 }
 
 /**
@@ -14,12 +12,12 @@ export function getToken() {
  * @param {string} token
  */
 export function setToken(token) {
-  return Cookies.set(TokenKey, token)
+  return window.localStorage.setItem(TokenKey, token)
 }
 
 /**
  * 移除 Cookie（在登出时使用）
  */
 export function removeToken() {
-  return Cookies.remove(TokenKey)
+  return window.localStorage.removeItem(TokenKey)
 }
