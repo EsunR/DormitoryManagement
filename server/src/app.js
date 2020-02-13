@@ -1,4 +1,7 @@
+// ====   require here   ====
+// 配置
 const { sysConfig } = require("./config")
+// package
 const path = require("path")
 const Koa = require("koa")
 const Router = require("koa-router")
@@ -6,8 +9,12 @@ const KoaBody = require("koa-body")
 const koaJwt = require("koa-jwt")
 const cors = require("@koa/cors")
 const koaStatic = require("koa-static")
+// 中间件
 const errorHandle = require("./middle/error_handler")
+const tokenChecker = require("./middle/token_checker")
+// 其他
 const dbGenerator = require("./db/db_generator")
+// ==== code from here ====
 
 // 实例化
 const app = new Koa()
@@ -44,6 +51,8 @@ app.use(
     ]
   })
 )
+
+app.use(tokenChecker())
 
 // 处理跨域
 app.use(cors())

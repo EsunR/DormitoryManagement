@@ -87,7 +87,8 @@
         type="primary"
         style="width:100%;margin-bottom:30px;"
         @click.native.prevent="handleLogin"
-      >登录</el-button>
+        >登录</el-button
+      >
       <!-- 登录按钮 -->
 
       <!-- 注册按钮 -->
@@ -97,7 +98,8 @@
         type="primary"
         style="width:100%;margin-bottom:30px;margin-left: 0"
         @click.native.prevent="handleRegister"
-      >注册</el-button>
+        >注册</el-button
+      >
       <!-- 注册按钮 -->
 
       <!-- 切换为注册 -->
@@ -112,6 +114,7 @@
 </template>
 
 <script>
+import { register } from '@/api/user'
 export default {
   name: 'Login',
   data() {
@@ -215,6 +218,13 @@ export default {
         if (valid) {
           this.loading = true
           // TODO: register
+
+          register({
+            account: this.loginForm.account,
+            password: this.loginForm.password
+          }).then(res => {
+            console.log(res)
+          })
         } else {
           console.log('error submit!!')
           return false
