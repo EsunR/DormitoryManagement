@@ -46,7 +46,7 @@
             ref="password"
             v-model="loginForm.password"
             :type="passwordType"
-            placeholder="Password"
+            placeholder="密码"
             name="password"
             tabindex="2"
             autocomplete="on"
@@ -126,7 +126,6 @@ export default {
       }
     }
     const validatorRepassword = (rule, value, callback) => {
-      console.log(value)
       if (value !== this.loginForm.password && this.registerMode) {
         callback(new Error('两次密码不符合'))
       } else {
@@ -135,8 +134,8 @@ export default {
     }
     return {
       loginForm: {
-        account: 'admin',
-        password: '111111',
+        account: '',
+        password: '',
         repassword: ''
       },
       loginRules: {
@@ -218,7 +217,6 @@ export default {
         if (valid) {
           this.loading = true
           // TODO: register
-
           register({
             account: this.loginForm.account,
             password: this.loginForm.password
