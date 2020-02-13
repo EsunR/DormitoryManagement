@@ -17,6 +17,7 @@ class User extends Model {
 
 User.init(
   {
+    // User 表的 id 必须创建，否则 account 会被代替为用户 id
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -39,7 +40,8 @@ User.init(
       defaultValue: "student" // 可能值：student admin superAdmin
     },
     name: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: true
     }
   },
   {

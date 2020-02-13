@@ -1,16 +1,23 @@
+/**
+ * 开发模式说明：
+ * 开启 devMode，Token 不会验证有效性，所有的合法 Token 都会通过验证
+ * 关闭 devMode 后，Token 会验证有效性，防止 Token 泛滥
+ */
 const sysConfig = {
+  devMode: true, // 是否开启开发模式
   port: 8080,
   pwdSaltRound: 10,
   tokenSalt: "awsl",
   tokenExp: 3600 * 24 * 14, // 14 Days
-  maxDevice: 3
+  maxDevice: 3 // Token 可存放的设备数
 }
 
 const databaseConfig = {
   host: "localhost",
   name: "dormitory",
   user: "root",
-  password: "root"
+  password: "root",
+  rebuild: true // 是否每次重启服务器时重建数据库
 }
 
 module.exports = {

@@ -64,6 +64,7 @@ const actions = {
             reject('getInfo: roles must be a non-null array!')
           }
 
+          // 设置用户信息
           commit('SET_ROLES', roles)
           commit('SET_NAME', name || '用户名')
           commit(
