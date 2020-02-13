@@ -5,5 +5,8 @@ const Token = require("../model/token_model")
 User.hasMany(Token)
 
 module.exports = function() {
-  db.sequelize.sync()
+  console.log("DataBase Syncing ... ...")
+  db.sequelize.sync({
+    // force: true // 开启重建表，在正式环境下设置为 false
+  })
 }

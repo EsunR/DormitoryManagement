@@ -44,7 +44,8 @@ User.init(
   },
   {
     sequelize: db.sequelize,
-    modelName: "user"
+    modelName: "user",
+    paranoid: true
   }
 )
 
