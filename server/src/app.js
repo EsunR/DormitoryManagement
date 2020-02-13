@@ -23,6 +23,9 @@ const router = new Router()
 // 建立数据库连接
 dbGenerator()
 
+// 处理跨域
+app.use(cors())
+
 // 错误处理
 app.use(errorHandle())
 
@@ -53,9 +56,6 @@ app.use(
 )
 
 app.use(tokenChecker())
-
-// 处理跨域
-app.use(cors())
 
 // 创建路由
 router.use("/api/user", require("./routes/user_router"))

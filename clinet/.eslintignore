@@ -1,4 +1,5 @@
 build/*.js
 src/assets
+src/router/*.js
 public
 dist

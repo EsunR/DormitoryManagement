@@ -1,4 +1,4 @@
-import { login, logout, getInfo } from '@/api/user'
+import { login, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
 
@@ -29,66 +29,68 @@ const mutations = {
 }
 
 const actions = {
-  // user login 在登录时调用
+  // user login 在登录时调用，获取用户 Token 并写入 Store 和 Localstroge
   login({ commit }, userInfo) {
     const { account, password } = userInfo
     return new Promise((resolve, reject) => {
-      login({ account: account.trim(), password: password }).then(response => {
-        const { data } = response
-        commit('SET_TOKEN', data.token)
-        setToken(data.token)
-        resolve()
-      }).catch(error => {
-        reject(error)
-      })
+      login({ account: account.trim(), password: password })
+        .then(response => {
+          const { data } = response
+          commit('SET_TOKEN', data.token)
+          setToken(data.token)
+          resolve()
+        })
+        .catch(error => {
+          reject(error)
+        })
     })
   },
 
   // get user info 在获取用户信息时调用，向 store 中写入信息
-  getInfo({ commit, state }) {
+  getInfo({ commit }) {
     return new Promise((resolve, reject) => {
-      getInfo(state.token).then(response => {
-        const { data } = response
+      getInfo()
+        .then(response => {
+          const { data } = response
+          if (!data) {
+            reject('Token 验证失败，轻重新登录。')
+          }
 
-        if (!data) {
-          reject('Token 验证失败，轻重新登录。')
-        }
+          data.roles = [data.role]
+          const { roles, name, avatar, introduction } = data
 
-        const { roles, name, avatar, introduction } = data
+          // 服务器端返回的角色必须是一个数组
+          if (!roles || roles.length <= 0) {
+            reject('getInfo: roles must be a non-null array!')
+          }
 
-        // 服务器端返回的角色必须是一个数组
-        if (!roles || roles.length <= 0) {
-          reject('getInfo: roles must be a non-null array!')
-        }
-
-        commit('SET_ROLES', roles)
-        commit('SET_NAME', name)
-        commit('SET_AVATAR', avatar)
-        commit('SET_INTRODUCTION', introduction)
-        resolve(data)
-      }).catch(error => {
-        reject(error)
-      })
+          commit('SET_ROLES', roles)
+          commit('SET_NAME', name || '用户名')
+          commit(
+            'SET_AVATAR',
+            avatar || 'http://img.cdn.esunr.xyz/github_avatar.jpeg'
+          )
+          commit('SET_INTRODUCTION', introduction || '个人介绍')
+          resolve(data)
+        })
+        .catch(error => {
+          reject(error)
+        })
     })
   },
 
   // user logout
-  logout({ commit, state, dispatch }) {
-    return new Promise((resolve, reject) => {
-      logout(state.token).then(() => {
-        commit('SET_TOKEN', '')
-        commit('SET_ROLES', [])
-        removeToken()
-        resetRouter()
+  logout({ commit, dispatch }) {
+    return new Promise(resolve => {
+      commit('SET_TOKEN', '')
+      commit('SET_ROLES', [])
+      removeToken()
+      resetRouter()
 
-        // reset visited views and cached views
-        // to fixed https://github.com/PanJiaChen/vue-element-admin/issues/2485
-        dispatch('tagsView/delAllViews', null, { root: true })
+      // 复位视图，让用户处于未登录状态
+      dispatch('tagsView/delAllViews', null, { root: true })
 
-        resolve()
-      }).catch(error => {
-        reject(error)
-      })
+      resolve()
     })
   },
 
@@ -115,7 +117,9 @@ const actions = {
       resetRouter()
 
       // generate accessible routes map based on roles
-      const accessRoutes = await dispatch('permission/generateRoutes', roles, { root: true })
+      const accessRoutes = await dispatch('permission/generateRoutes', roles, {
+        root: true
+      })
 
       // dynamically add accessible routes
       router.addRoutes(accessRoutes)
