@@ -15,7 +15,7 @@
           <div class="bottom">
             <div class="creator">评价人: {{ evaluate.userName }}</div>
             <div class="time">
-              {{ evaluate.createdAt | formatDate('YYYY年MM月DD日 HH:MM') }}
+              {{ evaluate.createdAt | formatDate('YYYY年MM月DD日 HH:mm') }}
             </div>
           </div>
         </div>

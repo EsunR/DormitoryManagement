@@ -34,7 +34,20 @@ router.get("/getUserRecords", async ctx => {
     default:
       throw new Error("查询失败，请检查传入参数的类型")
   }
-  ctx.body = new ResBody({ data: records })
+  ctx.body = new ResBody({ data: { records } })
+})
+
+router.get("/getRoomRecords", async ctx => {
+  const { type, roomId, days } = ctx.request.query
+  let records = []
+  switch (type) {
+    case "getup":
+      records = await RecordController.getRoomGetupRecords(roomId, days)
+      break
+    default:
+      throw new Error("查询失败，请检查传入参数的类型")
+  }
+  ctx.body = new ResBody({ data: { records } })
 })
 
 module.exports = router.routes()
