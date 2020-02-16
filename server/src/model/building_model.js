@@ -1,7 +1,6 @@
 const { sequelize } = require("../db/index")
 const { DataTypes, Model } = require("sequelize")
 const User = require("./user_model")
-const Cleaner = require("./cleaner_model")
 
 class Building extends Model {
   static async hasBuilding(id) {
@@ -12,8 +11,8 @@ class Building extends Model {
       return true
     }
   }
-  static async createBuilding(name) {
-    const building = await Building.build({ name }).save()
+  static async createBuilding({ name, layers }) {
+    const building = await Building.create({ name, layers })
     return building
   }
   static async addAdmin(buildingId, userId) {
@@ -28,10 +27,18 @@ class Building extends Model {
   static async addCleaner(buildingId, cleanerId) {
     try {
       const building = await Building.findOne({ where: { id: buildingId } })
-      const cleaner = await Cleaner.findOne({ where: { id: cleanerId } })
-      return building.addCleaner(cleaner)
+      building.cleanerId = cleanerId
+      return building.save()
     } catch (e) {
       throw new Error("添加保洁员失败")
+    }
+  }
+  static async addFloor(buildingId, floor) {
+    try {
+      floor.buildingId = buildingId
+      return await floor.save()
+    } catch (error) {
+      console.log(error)
     }
   }
 }
@@ -41,6 +48,11 @@ Building.init(
     name: {
       comment: "楼宇名称",
       type: DataTypes.STRING,
+      allowNull: false
+    },
+    layers: {
+      comment: "楼层层数",
+      type: DataTypes.INTEGER,
       allowNull: false
     }
   },

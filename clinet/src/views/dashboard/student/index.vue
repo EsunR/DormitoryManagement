@@ -1,20 +1,21 @@
 <template>
   <div class="dashboard-editor-container">
     <!-- Top  -->
-    <div class="top clearfix">
+    <div class="top clearfix" v-if="newUser">
       <img class="avatar" :src="avatar" style="float: left" />
       <div class="info-container">
         <span class="display_name">{{ name }}</span>
         <span style="font-size:20px;padding-top:20px;display:inline-block;"
-          >宿舍概览</span
+          >用户信息填写</span
         >
       </div>
     </div>
     <!-- Top  -->
 
     <!-- Main -->
-    <div class="main">
-      main
+    <div class="dashboard-main-container">
+      <guide v-if="newUser"></guide>
+      <info v-else></info>
     </div>
     <!-- Main -->
   </div>
@@ -22,26 +23,38 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import Guide from './guide'
+import Info from './info'
 
 export default {
-  name: 'DashboardEditor',
+  name: 'DashboardStudent',
+  components: {
+    Guide,
+    Info
+  },
   data() {
     return {}
   },
   computed: {
-    ...mapGetters(['name', 'avatar', 'roles'])
+    ...mapGetters([
+      'name',
+      'avatar',
+      'roles',
+      'room',
+      'floor',
+      'building',
+      'newUser'
+    ])
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .dashboard-editor-container {
-  background-color: #e3e3e3;
-  min-height: 100vh;
   padding: 50px 60px 0px;
   .top {
     .avatar {
-      width: 170px;
+      width: 160px;
       border-radius: 50%;
       box-shadow: 0 5px 10px rgba($color: #000000, $alpha: 0.1);
     }
@@ -64,10 +77,6 @@ export default {
         top: 25px;
       }
     }
-  }
-
-  .main {
-    background-color: pink;
   }
 }
 </style>

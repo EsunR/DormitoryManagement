@@ -9,7 +9,8 @@ const KoaBody = require("koa-body")
 const koaJwt = require("koa-jwt")
 const cors = require("@koa/cors")
 const koaStatic = require("koa-static")
-// 中间件
+const KoaLoger = require("koa-logger")
+// 自定义中间件
 const errorHandle = require("./middle/error_handler")
 const tokenChecker = require("./middle/token_checker")
 // 其他
@@ -22,6 +23,9 @@ const router = new Router()
 
 // 建立数据库连接
 dbGenerator()
+
+// log
+app.use(KoaLoger())
 
 // 处理跨域
 app.use(cors())
@@ -59,6 +63,12 @@ app.use(tokenChecker())
 
 // 创建路由
 router.use("/api/user", require("./routes/user_router"))
+router.use("/api/building", require("./routes/building_router"))
+router.use("/api/floor", require("./routes/floor_router"))
+router.use("/api/room", require("./routes/room_router"))
+router.use("/api/evaluate", require("./routes/evaluate_router"))
+router.use("/api/record", require("./routes/record_router"))
+
 app.use(router.routes())
 
 app.listen(sysConfig.port)

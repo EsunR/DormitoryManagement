@@ -3,19 +3,24 @@ import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
 
 const state = {
+  allUserInfo: {},
   token: getToken(), // 由 cookie 获取 token
   name: '',
   avatar: '',
   introduction: '',
-  roles: []
+  roles: [],
+  room: undefined,
+  floor: undefined,
+  building: undefined,
+  newUser: false
 }
 
 const mutations = {
+  SET_ALLUSERINFO: (state, info) => {
+    state.allUserInfo = info
+  },
   SET_TOKEN: (state, token) => {
     state.token = token
-  },
-  SET_INTRODUCTION: (state, introduction) => {
-    state.introduction = introduction
   },
   SET_NAME: (state, name) => {
     state.name = name
@@ -25,6 +30,18 @@ const mutations = {
   },
   SET_ROLES: (state, roles) => {
     state.roles = roles
+  },
+  SET_ROOM: (state, room) => {
+    state.room = room
+  },
+  SET_FLOOR: (state, floor) => {
+    state.floor = floor
+  },
+  SET_BUILDING: (state, building) => {
+    state.building = building
+  },
+  SET_NEWUSER: (state, value) => {
+    state.newUser = value
   }
 }
 
@@ -57,7 +74,7 @@ const actions = {
           }
 
           data.roles = [data.role]
-          const { roles, name, avatar, introduction } = data
+          const { roles, name, avatar, room, floor, building } = data
 
           // 服务器端返回的角色必须是一个数组
           if (!roles || roles.length <= 0) {
@@ -66,12 +83,24 @@ const actions = {
 
           // 设置用户信息
           commit('SET_ROLES', roles)
-          commit('SET_NAME', name || '用户名')
+          commit('SET_NAME', name || '欢迎您，新用户')
           commit(
             'SET_AVATAR',
             avatar || 'http://img.cdn.esunr.xyz/github_avatar.jpeg'
           )
-          commit('SET_INTRODUCTION', introduction || '个人介绍')
+          commit('SET_ROOM', room)
+          commit('SET_FLOOR', floor)
+          commit('SET_BUILDING', building)
+          if (data.role === 'student' && !room) {
+            commit('SET_NEWUSER', true)
+          } else {
+            commit('SET_NEWUSER', false)
+          }
+          // 将信息存储到 allinfo 中
+          delete data.room
+          delete data.floor
+          delete data.building
+          commit('SET_ALLUSERINFO', data)
           resolve(data)
         })
         .catch(error => {

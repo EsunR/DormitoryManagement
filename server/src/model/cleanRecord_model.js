@@ -7,7 +7,7 @@ CleanRecord.init(
   {},
   {
     sequelize: db.sequelize,
-    modelName: "clean_record",
+    modelName: "cleanRecord",
     paranoid: true
   }
 )
