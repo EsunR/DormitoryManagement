@@ -1,12 +1,22 @@
 const { sequelize } = require("../db/index")
 const { DataTypes, Model } = require("sequelize")
-const Building = require("../model/building_model")
+const Building = require("./building_model")
 
-class Floor extends Model {}
+class Floor extends Model {
+  static async createFloor({ layer, buildingId }) {
+    try {
+      const floor = await Floor.create({ layer, buildingId })
+      return floor
+    } catch (e) {
+      console.log(e)
+      throw new Error("创建楼层失败")
+    }
+  }
+}
 
 Floor.init(
   {
-    number: {
+    layer: {
       type: DataTypes.INTEGER,
       comment: "楼层",
       unique: "compositeIndex"
@@ -17,7 +27,6 @@ Floor.init(
         model: Building,
         key: "id"
       },
-      allowNull: false,
       unique: "compositeIndex"
     }
   },

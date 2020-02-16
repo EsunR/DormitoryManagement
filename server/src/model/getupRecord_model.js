@@ -7,7 +7,7 @@ GetupRedcord.init(
   {},
   {
     sequelize: db.sequelize,
-    modelName: "getup_record",
+    modelName: "getupRecord",
     paranoid: true
   }
 )

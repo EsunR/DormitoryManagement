@@ -7,7 +7,7 @@ BackRecord.init(
   {},
   {
     sequelize: db.sequelize,
-    modelName: "back_record",
+    modelName: "backRecord",
     paranoid: true
   }
 )

@@ -16,16 +16,34 @@ User.hasMany(Token)
 User.hasMany(CleanRecord)
 User.hasMany(BackRecord)
 User.hasMany(GetupRecord)
+User.hasMany(Evaluate)
+User.belongsTo(Room)
 
 Room.hasMany(User)
 Room.hasMany(CleanRecord)
 Room.hasMany(BackRecord)
 Room.hasMany(GetupRecord)
 Room.hasMany(Evaluate)
+Room.belongsTo(Floor)
+
+Evaluate.belongsTo(User)
+Evaluate.belongsTo(Room)
+
+CleanRecord.belongsTo(User)
+CleanRecord.belongsTo(Room)
+
+GetupRecord.belongsTo(User)
+GetupRecord.belongsTo(Room)
+
+BackRecord.belongsTo(User)
+BackRecord.belongsTo(Room)
 
 Floor.hasMany(Room)
+Floor.belongsTo(Building)
+Floor.belongsTo(Cleaner)
 
 Cleaner.hasMany(Floor)
+Cleaner.belongsTo(Building)
 
 Building.hasMany(Floor)
 Building.hasMany(Room)
@@ -59,7 +77,14 @@ async function createDefaultData() {
   })
 
   // 创建宿舍楼
-  const building = await Building.createBuilding("通天苑")
+  const building = await Building.createBuilding({
+    name: "通天苑",
+    layers: 10
+  })
+  await Building.createBuilding({
+    name: "大西门",
+    layers: 10
+  })
   // 将创建的宿舍楼与 admin 做关联
   await Building.addAdmin(building.id, admin.id)
 
@@ -68,7 +93,56 @@ async function createDefaultData() {
     name: "凉风阿姨",
     phone: "13822222222"
   })
+  // 为宿舍楼添加保洁员
   await Building.addCleaner(building.id, cleaner.id)
+
+  // 创建楼层
+  for (let i = 0; i < building.layers; i++) {
+    const layer = i + 1
+    const floor = await Floor.createFloor({
+      layer,
+      buildingId: null
+    })
+    await Building.addFloor(building.id, floor)
+  }
+
+  // 创建宿舍
+  const floor = await Floor.findOne({
+    where: { buildingId: building.id, layer: 1 }
+  })
+  const room = await Room.createRoom({
+    number: 101,
+    floorId: floor.id,
+    buildingId: floor.buildingId
+  })
+  // 为宿舍添加多个学生
+  await User.create({
+    account: "111111",
+    password: hash("123456"),
+    name: "哇水水",
+    role: "student",
+    phone: "123456789011",
+    roomId: room.id,
+    checkTime: new Date()
+  })
+  await User.create({
+    account: "222222",
+    password: hash("123456"),
+    name: "王大拿",
+    role: "student",
+    phone: "123456789011",
+    roomId: room.id,
+    checkTime: new Date()
+  })
+
+  // 创建评价
+  const evaluate = await Evaluate.createEvaluate({
+    score: 98,
+    note: "宿舍不错",
+    userId: admin.id,
+    roomId: room.id
+  })
+  console.log(room.getEvaluates)
 }
 
 module.exports = function() {
@@ -82,5 +156,8 @@ module.exports = function() {
       if (databaseConfig.rebuild) {
         createDefaultData()
       }
+    })
+    .then(() => {
+      console.log("DataBase Sync done")
     })
 }

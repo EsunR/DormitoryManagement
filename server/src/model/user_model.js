@@ -40,8 +40,14 @@ User.init(
       defaultValue: "student" // 可能值：student admin superAdmin
     },
     name: {
-      type: DataTypes.STRING,
-      allowNull: true
+      type: DataTypes.STRING
+    },
+    phone: {
+      type: DataTypes.STRING
+    },
+    checkTime: {
+      comment: "入住宿舍时间",
+      type: DataTypes.DATE
     }
   },
   {

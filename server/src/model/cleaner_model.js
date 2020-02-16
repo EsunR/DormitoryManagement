@@ -2,8 +2,8 @@ const { sequelize } = require("../db/index")
 const { DataTypes, Model } = require("sequelize")
 
 class Cleaner extends Model {
-  static async createCleaner({ name, phone }) {
-    return await Cleaner.create({ name, phone })
+  static async createCleaner({ name, phone, buildingId }) {
+    return await Cleaner.create({ name, phone, buildingId })
   }
 }
 

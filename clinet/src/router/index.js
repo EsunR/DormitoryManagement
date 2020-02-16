@@ -93,7 +93,23 @@ export const asyncRoutes = [
         }
       }
     ]
-  }, // 404 page must be placed at the end !!!
+  },
+  {
+    path: '/getupRecord',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/getup-record/index'),
+        name: 'getupRecord',
+        meta: {
+          title: '起床记录',
+          icon: 'eye-open'
+        }
+      }
+    ]
+  },
+  // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
 

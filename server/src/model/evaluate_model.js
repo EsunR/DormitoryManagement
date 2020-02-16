@@ -1,7 +1,11 @@
 const { sequelize } = require("../db/index")
 const { DataTypes, Model } = require("sequelize")
 
-class Evaluate extends Model {}
+class Evaluate extends Model {
+  static async createEvaluate({ score, note = "", userId, roomId }) {
+    return await Evaluate.create({ score, note, userId, roomId })
+  }
+}
 
 Evaluate.init(
   {
