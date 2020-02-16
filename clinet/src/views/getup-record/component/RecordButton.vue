@@ -40,7 +40,6 @@ export default {
 
 <style lang="scss" scoped>
 .record-button {
-  margin: 20px;
   width: 200px;
   height: 200px;
   border-radius: 50%;
