@@ -7,7 +7,7 @@
   >
     <div class="text">
       <span v-if="disable">今日已打卡</span>
-      <span v-else>起床打卡</span>
+      <span v-else>归宿打卡</span>
     </div>
     <div class="date">{{ getDate() }}</div>
   </div>

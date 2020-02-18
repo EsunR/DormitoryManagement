@@ -6,7 +6,7 @@
         <RecordButton
           @click="handleBtnClick"
           :disable="btnDisable"
-          btn-color="#1890ff"
+          btn-color="#4527A0"
         ></RecordButton>
       </div>
       <div class="right-wrapper">
@@ -67,7 +67,7 @@ export default {
       if (!this.btnDisable) {
         // 点击打卡
         const currentHour = parseInt(this.$moment().format('HH'))
-        if (currentHour < 5) {
+        if (currentHour < 19) {
           this.$message('时间还太早，暂不开放打卡')
         } else {
           addRecord({ type: 'getup' }).then(() => {
@@ -81,7 +81,7 @@ export default {
     },
     async fetchUserRecords(days) {
       const res = await getUserRecords({
-        type: 'getup',
+        type: 'back',
         userId: this.userId,
         days
       })
@@ -100,7 +100,7 @@ export default {
       this.userUpdateRecords = records
     })
     // 获取折线图数据
-    getLineChartData({ type: 'getup', roomId: this.roomId }).then(res => {
+    getLineChartData({ type: 'back', roomId: this.roomId }).then(res => {
       const { charData } = res.data
       this.charData = charData
     })

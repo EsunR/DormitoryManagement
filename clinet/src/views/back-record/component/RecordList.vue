@@ -1,7 +1,7 @@
 <template>
   <div class="record-list">
     <div class="info-wrapper">
-      <div class="top-text">早起概率</div>
+      <div class="top-text">早归概率</div>
       <div class="counter">
         <countTo
           :startVal="0"
@@ -44,7 +44,7 @@
 
 <script>
 import countTo from 'vue-count-to'
-const earlyPoint = 8
+const earlyPoint = 22
 export default {
   name: 'RecordList',
   components: {
@@ -104,9 +104,9 @@ export default {
         return '无记录'
       }
       if (time < earlyPoint) {
-        return '早起'
+        return '早归'
       } else {
-        return '晚起'
+        return '晚归'
       }
     },
     getCss(time) {
