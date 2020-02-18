@@ -109,6 +109,21 @@ export const asyncRoutes = [
       }
     ]
   },
+  {
+    path: '/backRecord',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/back-record/index'),
+        name: 'backRecord',
+        meta: {
+          title: '归宿记录',
+          icon: 'eye'
+        }
+      }
+    ]
+  },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
