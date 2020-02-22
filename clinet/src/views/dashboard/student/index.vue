@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard-editor-container">
+  <div class="dashboard-student-container">
     <!-- Top  -->
     <div class="top clearfix" v-if="newUser">
       <img class="avatar" :src="avatar" style="float: left" />
@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.dashboard-editor-container {
+.dashboard-student-container {
   padding: 50px 60px 0px;
   .top {
     .avatar {

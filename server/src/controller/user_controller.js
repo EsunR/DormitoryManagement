@@ -1,5 +1,6 @@
 const { User } = require("../model")
 const _ = require("lodash")
+const RecordController = require("./record_controller")
 
 module.exports = {
   /**
@@ -14,12 +15,18 @@ module.exports = {
     const room = await student.getRoom()
     const floor = await room.getFloor()
     const building = await floor.getBuilding()
+    const getupProb = await RecordController.getUserProbability("getup", userId)
+    const backProb = await RecordController.getUserProbability("back", userId)
+    const cleanProb = await RecordController.getUserProbability("clean", userId)
     const info = Object.assign(student.dataValues, {
       roomNumber: room.number,
       floorId: floor.id,
       floorLayer: floor.layer,
       buildingId: building.id,
-      buildingName: building.name
+      buildingName: building.name,
+      getupProb,
+      backProb,
+      cleanProb
     })
     return info
   },
@@ -44,5 +51,10 @@ module.exports = {
       })
     }
     return cloneUsers
+  },
+  async setStudentRoomNull(id) {
+    const student = await User.findOne({ where: { id, role: "student" } })
+    const result = await student.update({ roomId: null })
+    return result
   }
 }

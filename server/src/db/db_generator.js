@@ -78,12 +78,10 @@ async function createDefaultData() {
 
   // 创建宿舍楼
   const building = await Building.createBuilding({
-    name: "通天苑",
-    layers: 10
+    name: "通天苑"
   })
   await Building.createBuilding({
-    name: "大西门",
-    layers: 10
+    name: "大西门"
   })
   // 将创建的宿舍楼与 admin 做关联
   await Building.addAdmin(building.id, admin.id)
@@ -97,7 +95,7 @@ async function createDefaultData() {
   await Building.addCleaner(building.id, cleaner.id)
 
   // 创建楼层
-  for (let i = 0; i < building.layers; i++) {
+  for (let i = 0; i < 10; i++) {
     const layer = i + 1
     const floor = await Floor.createFloor({
       layer,
@@ -142,7 +140,6 @@ async function createDefaultData() {
     userId: admin.id,
     roomId: room.id
   })
-  console.log(room.getEvaluates)
 }
 
 module.exports = function() {

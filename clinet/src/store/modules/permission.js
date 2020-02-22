@@ -50,13 +50,8 @@ const actions = {
   generateRoutes({ commit }, roles) {
     return new Promise(resolve => {
       let accessedRoutes
-      if (roles.includes('admin')) {
-        // 如果是 admin 用户则加载所有的异步路由
-        accessedRoutes = asyncRoutes || []
-      } else {
-        // 其他用户需要过滤异步路由
-        accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
-      }
+      // 其他用户需要过滤异步路由
+      accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
       commit('SET_ROUTES', accessedRoutes)
       resolve(accessedRoutes)
     })

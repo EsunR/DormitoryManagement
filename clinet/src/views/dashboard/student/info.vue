@@ -34,6 +34,11 @@ export default {
       evaluatesData: []
     }
   },
+  computed: {
+    name() {
+      return this.$store.getters.name
+    }
+  },
   mounted() {
     getStudents({ roomId: this.$store.getters.room.id }).then(res => {
       this.studentsData = res.data.users

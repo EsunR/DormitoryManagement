@@ -16,6 +16,7 @@ const getters = {
   floor: state => state.user.floor,
   building: state => state.user.building,
   newUser: state => state.user.newUser,
+  manageBuildings: state => state.user.manageBuildings,
 
   // other
   permission_routes: state => state.permission.routes,

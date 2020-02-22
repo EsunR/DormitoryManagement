@@ -23,8 +23,14 @@ export function getInfo() {
   })
 }
 
-export function updateInfo({ name, phone, roomId, checkTime = null }) {
-  const data = { name, phone, roomId, checkTime }
+export function updateInfo({
+  name = null,
+  phone = null,
+  roomId = null,
+  checkTime = null,
+  password = null
+}) {
+  const data = { name, phone, roomId, checkTime, password }
   return request({
     url: '/user/updateInfo',
     method: 'post',
@@ -44,5 +50,13 @@ export function getStudents(params) {
     url: '/user/getStudents',
     method: 'get',
     params
+  })
+}
+
+export function searchAdmin(keywords) {
+  return request({
+    url: '/user/searchAdmin',
+    method: 'get',
+    params: { keywords }
   })
 }
