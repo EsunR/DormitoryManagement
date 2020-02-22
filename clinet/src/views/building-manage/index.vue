@@ -3,7 +3,7 @@
     <!-- 顶部表单 -->
     <h1 class="main-title">创建宿舍楼</h1>
     <div class="wrapper">
-      <BuildingAddForm></BuildingAddForm>
+      <BuildingAddForm @submitSuccess="fetchBuildings"></BuildingAddForm>
     </div>
     <!-- 顶部表单 -->
 
