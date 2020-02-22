@@ -126,12 +126,11 @@ export const asyncRoutes = [
       }
     ]
   },
-  // 管理员专属页面
   {
     path: '/buildingManage',
     component: Layout,
     meta: {
-      roles: ['superAdmin'] // you can set roles in root nav
+      roles: ['superAdmin']
     },
     children: [
       {
@@ -145,7 +144,24 @@ export const asyncRoutes = [
       }
     ]
   },
-
+  {
+    path: '/floorManage',
+    component: Layout,
+    meta: {
+      roles: ['superAdmin', 'admin']
+    },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/floor-manage/index'),
+        name: 'floorManage',
+        meta: {
+          title: '楼层管理',
+          icon: 'list'
+        }
+      }
+    ]
+  },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

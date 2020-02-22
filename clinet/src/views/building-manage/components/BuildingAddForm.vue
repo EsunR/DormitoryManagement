@@ -48,10 +48,10 @@ export default {
           type: 'warning'
         })
           .then(() => {
-            addBuildingWithRoom(this.formData).then(res => {
-              console.log(res)
+            addBuildingWithRoom(this.formData).then(() => {
               this.$message({ type: 'success', message: '添加成功！' })
               this.clean()
+              this.$emit('submitSuccess')
             })
           })
           .catch(() => {

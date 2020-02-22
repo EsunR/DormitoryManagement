@@ -7,3 +7,19 @@ export function getFloors(params) {
     params
   })
 }
+
+export function getFloorsDetail(buildingId) {
+  return request({
+    url: '/floor/getFloorsDetail',
+    method: 'get',
+    params: { buildingId }
+  })
+}
+
+export function addCleanerToFloor(floorId, cleanerId) {
+  return request({
+    url: '/floor/addCleanerToFloor',
+    method: 'post',
+    data: { floorId, cleanerId }
+  })
+}
