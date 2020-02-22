@@ -21,6 +21,7 @@
         </div>
       </el-col>
     </el-row>
+    <div class="tips" v-if="evaluatesData.length === 0">= 暂无评价 =</div>
   </div>
 </template>
 
@@ -85,5 +86,11 @@ export default {
     display: flex;
     justify-content: space-between;
   }
+}
+.tips {
+  background-color: #fff;
+  padding: 20px;
+  text-align: center;
+  color: rgba($color: #000000, $alpha: 0.5);
 }
 </style>

@@ -1,8 +1,9 @@
 const Router = require("koa-router")
+const { Op } = require("sequelize")
 const ResBody = require("../struct/ResBody")
 const bcypt = require("../utils/bcypt")
 const { sysConfig } = require("../config")
-const { User, Token } = require("../model")
+const { User, Token, Building } = require("../model")
 const {
   UserController,
   RoomController,
@@ -70,13 +71,15 @@ router.get("/info", async ctx => {
 
 router.post("/updateInfo", async ctx => {
   const { userId } = ctx.state.user
-  const { name, phone, roomId, checkTime } = ctx.request.body
+  const resbody = ctx.request.body
   const user = await User.findOne({ where: { id: userId } })
-  user.name = name
-  user.phone = phone
-  user.roomId = roomId
-  if (checkTime) {
-    user.checkTime = checkTime
+  for (let key in resbody) {
+    if (user[key] !== undefined && resbody[key]) {
+      user[key] = resbody[key]
+    }
+  }
+  if (resbody.password) {
+    user.password = bcypt.hash(resbody.password)
   }
   ctx.body = new ResBody({ data: await user.save() })
 })
@@ -97,6 +100,23 @@ router.get("/getStudents", async ctx => {
   ctx.body = new ResBody({
     data: { users }
   })
+})
+
+router.get("/searchAdmin", async ctx => {
+  const { keywords } = ctx.request.query
+  let admins = []
+  if (keywords.trim()) {
+    admins = await User.findAll({
+      where: {
+        role: "admin",
+        [Op.or]: {
+          name: { [Op.like]: `%${keywords}%` },
+          account: { [Op.like]: `%${keywords}%` }
+        }
+      }
+    })
+  }
+  ctx.body = new ResBody({ data: { admins, total: admins.length } })
 })
 
 module.exports = router.routes()

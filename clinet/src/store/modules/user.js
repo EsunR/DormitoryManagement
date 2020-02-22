@@ -1,6 +1,7 @@
 import { login, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
+import { getManageBuildings } from '@/api/building'
 
 const state = {
   allUserInfo: {},
@@ -12,7 +13,8 @@ const state = {
   room: undefined,
   floor: undefined,
   building: undefined,
-  newUser: false
+  newUser: false,
+  manageBuildings: []
 }
 
 const mutations = {
@@ -42,6 +44,9 @@ const mutations = {
   },
   SET_NEWUSER: (state, value) => {
     state.newUser = value
+  },
+  SET_MANAGEBUILDINGS: (state, value) => {
+    state.manageBuildings = value
   }
 }
 
@@ -106,6 +111,10 @@ const actions = {
         .catch(error => {
           reject(error)
         })
+      getManageBuildings().then(res => {
+        const { buildings } = res.data
+        commit('SET_MANAGEBUILDINGS', buildings)
+      })
     })
   },
 

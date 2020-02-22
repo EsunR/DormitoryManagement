@@ -1,5 +1,5 @@
 <template>
-  <div id="getup-record">
+  <div id="clean-record">
     <h1 class="main-title">个人记录</h1>
     <div class="top-wrapper">
       <div class="left-wrapper">
@@ -12,15 +12,13 @@
       <div class="right-wrapper">
         <RecordList
           @change="handleSelectedChange"
-          :records="userBackRecords"
+          :records="userCleanRecords"
         ></RecordList>
       </div>
     </div>
-    <h1 class="main-title">折线图表</h1>
+    <h1 class="main-title">打扫历史记录</h1>
     <div class="botttom-wrapper">
-      <div class="chart-wrapper">
-        <Chart :char-data="charData"></Chart>
-      </div>
+      <Table :table-data="roomCleanRecords"></Table>
     </div>
   </div>
 </template>
@@ -28,20 +26,20 @@
 <script>
 import RecordButton from './component/RecordButton'
 import RecordList from './component/RecordList'
-import Chart from './component/Chart'
-import { getUserRecords, addRecord, getLineChartData } from '@/api/record'
+import Table from './component/Table'
+import { getUserRecords, addRecord, getRoomRecords } from '@/api/record'
 export default {
-  name: 'BackRecord',
+  name: 'CleanRecord',
   components: {
     RecordButton,
     RecordList,
-    Chart
+    Table
   },
   data() {
     return {
       btnDisable: true,
-      userBackRecords: [],
-      charData: {},
+      userCleanRecords: [],
+      roomCleanRecords: [],
       days: 7
     }
   },
@@ -54,8 +52,12 @@ export default {
     }
   },
   watch: {
-    userBackRecords(newVal) {
-      if (newVal[0].time) {
+    roomCleanRecords(newVal) {
+      if (
+        newVal.length > 0 &&
+        this.$moment(newVal[0].createdAt).format('YYYY-MM-DD') ===
+          this.$moment().format('YYYY-MM-DD')
+      ) {
         this.btnDisable = true
       } else {
         this.btnDisable = false
@@ -66,23 +68,29 @@ export default {
     handleBtnClick() {
       if (!this.btnDisable) {
         // 点击打卡
-        const currentHour = parseInt(this.$moment().format('HH'))
-        if (currentHour < 19) {
-          this.$message('时间还太早，暂不开放打卡')
-        } else {
-          addRecord({ type: 'back' }).then(() => {
-            this.btnDisable = true
-            this.fetchUserRecords(this.days).then(records => {
-              this.userBackRecords = records
-            })
+        addRecord({ type: 'clean' }).then(() => {
+          this.btnDisable = true
+          this.fetchUserRecords(this.days).then(records => {
+            this.userCleanRecords = records
           })
-        }
+          this.fetchRoomRecords(this.days).then(records => {
+            this.roomCleanRecords = records
+          })
+        })
       }
     },
     async fetchUserRecords(days) {
       const res = await getUserRecords({
-        type: 'back',
+        type: 'clean',
         userId: this.userId,
+        days
+      })
+      return res.data.records
+    },
+    async fetchRoomRecords(days) {
+      const res = await getRoomRecords({
+        type: 'clean',
+        roomId: this.roomId,
         days
       })
       return res.data.records
@@ -90,26 +98,28 @@ export default {
     handleSelectedChange(value) {
       this.days = value
       this.fetchUserRecords(value).then(records => {
-        this.userBackRecords = records
+        this.userCleanRecords = records
+      })
+      this.fetchRoomRecords(value).then(records => {
+        this.roomCleanRecords = records
       })
     }
   },
   mounted() {
     // 获取用户个人早起信息
     this.fetchUserRecords(this.days).then(records => {
-      this.userBackRecords = records
+      this.userCleanRecords = records
     })
-    // 获取折线图数据
-    getLineChartData({ type: 'back', roomId: this.roomId }).then(res => {
-      const { charData } = res.data
-      this.charData = charData
+    // 获取表格数据
+    this.fetchRoomRecords(this.days).then(records => {
+      this.roomCleanRecords = records
     })
   }
 }
 </script>
 
 <style lang="scss" scoped>
-#getup-record {
+#clean-record {
   padding: 50px 60px 0px;
   .top-wrapper {
     display: flex;

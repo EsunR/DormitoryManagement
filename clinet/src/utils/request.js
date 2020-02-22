@@ -42,9 +42,9 @@ service.interceptors.response.use(
     }
   },
   error => {
-    console.log('err' + error) // debug 使用
+    console.log('err:' + error) // debug 使用
     Message({
-      message: error.message,
+      message: error.response.data.msg || error.message,
       type: 'error',
       duration: 5 * 1000
     })

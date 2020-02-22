@@ -68,6 +68,7 @@ router.use("/api/floor", require("./routes/floor_router"))
 router.use("/api/room", require("./routes/room_router"))
 router.use("/api/evaluate", require("./routes/evaluate_router"))
 router.use("/api/record", require("./routes/record_router"))
+router.use("/api/cleaner", require("./routes/cleaner_router"))
 
 app.use(router.routes())
 

@@ -63,7 +63,7 @@ export const constantRoutes = [
         path: 'index',
         component: () => import('@/views/profile/index'),
         name: 'Profile',
-        meta: { title: 'Profile', icon: 'user', noCache: true }
+        meta: { title: '个人中心', icon: 'user', noCache: true }
       }
     ]
   }
@@ -71,32 +71,13 @@ export const constantRoutes = [
 
 // 异步路由
 export const asyncRoutes = [
-  {
-    path: '/permission',
-    component: Layout,
-    redirect: '/permission/page',
-    alwaysShow: true, // will always show the root menu
-    name: 'Permission',
-    meta: {
-      title: 'Permission',
-      icon: 'lock',
-      roles: ['admin'] // you can set roles in root nav
-    },
-    children: [
-      {
-        path: 'page',
-        component: () => import('@/views/permission/page'),
-        name: 'PagePermission',
-        meta: {
-          title: 'Page Permission',
-          roles: ['admin'] // or you can only set roles in sub nav
-        }
-      }
-    ]
-  },
+  // 学生专属页面 =========================
   {
     path: '/getupRecord',
     component: Layout,
+    meta: {
+      roles: ['student']
+    },
     children: [
       {
         path: 'index',
@@ -112,6 +93,9 @@ export const asyncRoutes = [
   {
     path: '/backRecord',
     component: Layout,
+    meta: {
+      roles: ['student'] // you can set roles in root nav
+    },
     children: [
       {
         path: 'index',
@@ -124,6 +108,44 @@ export const asyncRoutes = [
       }
     ]
   },
+  {
+    path: '/cleanRecord',
+    component: Layout,
+    meta: {
+      roles: ['student'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/clean-record/index'),
+        name: 'cleanRecord',
+        meta: {
+          title: '打扫记录',
+          icon: 'theme'
+        }
+      }
+    ]
+  },
+  // 管理员专属页面
+  {
+    path: '/buildingManage',
+    component: Layout,
+    meta: {
+      roles: ['superAdmin'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/building-manage/index'),
+        name: 'cleanRecord',
+        meta: {
+          title: '宿舍楼管理',
+          icon: 'international'
+        }
+      }
+    ]
+  },
+
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

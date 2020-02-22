@@ -3,33 +3,28 @@
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('newVisitis')">
         <div class="card-panel-icon-wrapper icon-people">
-          <svg-icon icon-class="peoples" class-name="card-panel-icon" />
+          <svg-icon icon-class="tree" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            New Visits
+            宿舍楼名
           </div>
-          <count-to
-            :start-val="0"
-            :end-val="102400"
-            :duration="2600"
-            class="card-panel-num"
-          />
+          <div class="card-panel-num">{{ buildingName }}</div>
         </div>
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('messages')">
         <div class="card-panel-icon-wrapper icon-message">
-          <svg-icon icon-class="message" class-name="card-panel-icon" />
+          <svg-icon icon-class="nested" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            Messages
+            楼层数
           </div>
           <count-to
             :start-val="0"
-            :end-val="81212"
+            :end-val="layerCount"
             :duration="3000"
             class="card-panel-num"
           />
@@ -39,15 +34,15 @@
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('purchases')">
         <div class="card-panel-icon-wrapper icon-money">
-          <svg-icon icon-class="money" class-name="card-panel-icon" />
+          <svg-icon icon-class="component" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            Purchases
+            房间数
           </div>
           <count-to
             :start-val="0"
-            :end-val="9280"
+            :end-val="roomCount"
             :duration="3200"
             class="card-panel-num"
           />
@@ -57,15 +52,15 @@
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('shoppings')">
         <div class="card-panel-icon-wrapper icon-shopping">
-          <svg-icon icon-class="shopping" class-name="card-panel-icon" />
+          <svg-icon icon-class="peoples" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            Shoppings
+            学生数
           </div>
           <count-to
             :start-val="0"
-            :end-val="13600"
+            :end-val="studentCount"
             :duration="3600"
             class="card-panel-num"
           />
@@ -77,10 +72,35 @@
 
 <script>
 import CountTo from 'vue-count-to'
+import { getBuildingInfo } from '@/api/building'
 
 export default {
   components: {
     CountTo
+  },
+  data() {
+    return {
+      buildingName: 'NAN',
+      layerCount: 0,
+      roomCount: 0,
+      studentCount: 0
+    }
+  },
+  props: {
+    buildingId: {
+      type: Number,
+      required: true
+    }
+  },
+  watch: {
+    buildingId(val) {
+      getBuildingInfo(val).then(res => {
+        this.buildingName = res.data.name
+        this.layerCount = res.data.floorCount
+        this.roomCount = res.data.roomCount
+        this.studentCount = res.data.studentCount
+      })
+    }
   },
   methods: {
     handleSetLineChartData(type) {
@@ -92,12 +112,6 @@ export default {
 
 <style lang="scss" scoped>
 .panel-group {
-  margin-top: 18px;
-
-  .card-panel-col {
-    margin-bottom: 32px;
-  }
-
   .card-panel {
     height: 108px;
     cursor: pointer;

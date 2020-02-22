@@ -70,7 +70,8 @@ export default {
       }
     },
     handleSelectorChange(value) {
-      this.$emit('select', value[value.length - 1])
+      // roomId roomPath
+      this.$emit('select', value[value.length - 1], value)
     }
   }
 }

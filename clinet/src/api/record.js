@@ -13,12 +13,21 @@ export function addRecord({ type }) {
   1. type: 查询的记录类型，可能指为 `getup` `back` `clean`
   2. userId: 查询的用户id
   3. days: 查询的天数
+  4. pure：是否获取未补全的数据
  */
-export function getUserRecords({ type, userId, days }) {
+export function getUserRecords({ type, userId, days, pure = false }) {
   return request({
     url: '/record/getUserRecords',
     method: 'get',
-    params: { type, userId, days }
+    params: { type, userId, days, pure }
+  })
+}
+
+export function getRoomRecords({ type, roomId, days, pure = false }) {
+  return request({
+    url: '/record/getRoomRecords',
+    method: 'get',
+    params: { type, roomId, days, pure }
   })
 }
 
@@ -32,5 +41,47 @@ export function getLineChartData({ type, roomId }) {
     url: '/record/getLineChartData',
     method: 'get',
     params: { type, roomId }
+  })
+}
+
+/**
+ * 获取用户的早起率、早归率、打扫频率，参数如下：
+  1. ?userId=[] 用户ID
+ */
+export function getUserProbability(userId) {
+  return request({
+    url: '/record/getUserProbability',
+    method: 'get',
+    params: { userId }
+  })
+}
+
+/**
+ * 获取记录表格数据：
+  - type: 获取的记录类型（必选）
+  - current: 当前页（可选，默认1）
+  - step: 分页间隔（可选，默认10）
+  - buildingId （可选）
+  - floorId（可选）
+  - roomId (可选)
+  - startTime: 起始时间（可选）
+  - endTime：结束时间（可选）
+ */
+export function getRecordTableData(
+  type,
+  { current, step, buildingId, floorId, startTime, endTime }
+) {
+  return request({
+    url: '/record/getRecordTableData',
+    method: 'get',
+    params: {
+      type,
+      current,
+      step,
+      buildingId,
+      floorId,
+      startTime,
+      endTime
+    }
   })
 }

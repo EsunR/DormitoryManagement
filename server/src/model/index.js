@@ -1,7 +1,7 @@
 module.exports = {
   User: require("./user_model"),
   Token: require("./token_model"),
-  CleanRecord: require("./cleaner_model"),
+  CleanRecord: require("./cleanRecord_model"),
   BackRecord: require("./backRecord_model"),
   GetupRecord: require("./getupRecord_model"),
   Room: require("./room_model"),

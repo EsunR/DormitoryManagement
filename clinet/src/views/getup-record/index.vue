@@ -12,7 +12,7 @@
       <div class="right-wrapper">
         <RecordList
           @change="handleSelectedChange"
-          :records="userUpdateRecords"
+          :records="userGetupRecords"
         ></RecordList>
       </div>
     </div>
@@ -40,7 +40,7 @@ export default {
   data() {
     return {
       btnDisable: true,
-      userUpdateRecords: [],
+      userGetupRecords: [],
       charData: {},
       days: 7
     }
@@ -54,7 +54,7 @@ export default {
     }
   },
   watch: {
-    userUpdateRecords(newVal) {
+    userGetupRecords(newVal) {
       if (newVal[0].time) {
         this.btnDisable = true
       } else {
@@ -73,7 +73,7 @@ export default {
           addRecord({ type: 'getup' }).then(() => {
             this.btnDisable = true
             this.fetchUserRecords(this.days).then(records => {
-              this.userUpdateRecords = records
+              this.userGetupRecords = records
             })
           })
         }
@@ -90,14 +90,14 @@ export default {
     handleSelectedChange(value) {
       this.days = value
       this.fetchUserRecords(value).then(records => {
-        this.userUpdateRecords = records
+        this.userGetupRecords = records
       })
     }
   },
   mounted() {
     // 获取用户个人早起信息
     this.fetchUserRecords(this.days).then(records => {
-      this.userUpdateRecords = records
+      this.userGetupRecords = records
     })
     // 获取折线图数据
     getLineChartData({ type: 'getup', roomId: this.roomId }).then(res => {
