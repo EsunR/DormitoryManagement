@@ -60,3 +60,35 @@ export function searchAdmin(keywords) {
     params: { keywords }
   })
 }
+
+export function searchUser(keywords) {
+  return request({
+    url: '/user/searchUser',
+    method: 'get',
+    params: { keywords }
+  })
+}
+
+export function addAdmin({ name, account, phone, password, role }) {
+  return request({
+    url: '/user/addAdmin',
+    method: 'post',
+    data: { name, account, phone, password, role }
+  })
+}
+
+export function getAdminTableData() {
+  return request({
+    url: '/user/getAdminTableData',
+    method: 'get'
+  })
+}
+
+export function getStudentInfoByIdOrAccount({ type = 'id', value }) {
+  console.log('value: ', value)
+  return request({
+    url: '/user/getStudentInfoByIdOrAccount',
+    method: 'get',
+    params: { type, value }
+  })
+}

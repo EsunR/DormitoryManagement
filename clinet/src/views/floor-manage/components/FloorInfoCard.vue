@@ -3,7 +3,7 @@
     <div class="title">楼层：{{ floorInfo.layer }}层</div>
     <div class="info">
       <div class="left">
-        <div
+        <router-link
           class="room-itme"
           :class="{
             empty: room.studentCount === 0,
@@ -11,9 +11,11 @@
           }"
           v-for="room in floorInfo.rooms"
           :key="room.id"
+          tag="div"
+          :to="{ name: 'roomInfo', query: { roomId: room.id } }"
         >
           {{ room.number }}
-        </div>
+        </router-link>
       </div>
       <div class="right">
         <div class="cleaner" @click="dialogVisible = true">

@@ -228,3 +228,9 @@ aside {
   padding: 20px;
   overflow: hidden;
 }
+
+.no-data-tips {
+  font-weight: bold;
+  text-align: center;
+  color: rgba($color: #000000, $alpha: 0.3);
+}

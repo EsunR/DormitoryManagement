@@ -25,6 +25,7 @@ Room.hasMany(BackRecord)
 Room.hasMany(GetupRecord)
 Room.hasMany(Evaluate)
 Room.belongsTo(Floor)
+Room.belongsTo(Building)
 
 Evaluate.belongsTo(User)
 Evaluate.belongsTo(Room)

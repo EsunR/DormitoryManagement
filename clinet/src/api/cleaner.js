@@ -7,3 +7,11 @@ export function addCleaner({ name, phone, buildingId }) {
     data: { name, phone, buildingId }
   })
 }
+
+export function delCleaner(cleanerId) {
+  return request({
+    url: '/cleaner/delCleaner',
+    method: 'delete',
+    params: { cleanerId }
+  })
+}

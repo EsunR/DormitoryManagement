@@ -94,7 +94,7 @@ export const asyncRoutes = [
     path: '/backRecord',
     component: Layout,
     meta: {
-      roles: ['student'] // you can set roles in root nav
+      roles: ['student']
     },
     children: [
       {
@@ -112,7 +112,7 @@ export const asyncRoutes = [
     path: '/cleanRecord',
     component: Layout,
     meta: {
-      roles: ['student'] // you can set roles in root nav
+      roles: ['student']
     },
     children: [
       {
@@ -122,6 +122,25 @@ export const asyncRoutes = [
         meta: {
           title: '打扫记录',
           icon: 'theme'
+        }
+      }
+    ]
+  },
+  //  管理员路由 =========================
+  {
+    path: '/adminManage',
+    component: Layout,
+    meta: {
+      roles: ['superAdmin']
+    },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/admin-manage/index'),
+        name: 'adminManage',
+        meta: {
+          title: '管理员管理',
+          icon: 'edit'
         }
       }
     ]
@@ -158,6 +177,42 @@ export const asyncRoutes = [
         meta: {
           title: '楼层管理',
           icon: 'list'
+        }
+      }
+    ]
+  },
+  {
+    path: '/roomInfo',
+    component: Layout,
+    meta: {
+      roles: ['superAdmin', 'admin']
+    },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/room-info/index'),
+        name: 'roomInfo',
+        meta: {
+          title: '宿舍信息',
+          icon: 'peoples'
+        }
+      }
+    ]
+  },
+  {
+    path: '/userInfo',
+    component: Layout,
+    meta: {
+      roles: ['superAdmin', 'admin']
+    },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/user-info/index'),
+        name: 'userInfo',
+        meta: {
+          title: '学生信息',
+          icon: 'people'
         }
       }
     ]
