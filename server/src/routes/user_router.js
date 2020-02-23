@@ -10,6 +10,7 @@ const {
   FloorController,
   BuildingController
 } = require("../controller")
+const utils = require("../utils")
 
 const router = new Router()
 
@@ -117,6 +118,63 @@ router.get("/searchAdmin", async ctx => {
     })
   }
   ctx.body = new ResBody({ data: { admins, total: admins.length } })
+})
+
+router.get("/searchUser", async ctx => {
+  const { keywords } = ctx.request.query
+  let students = []
+  if (keywords.trim()) {
+    students = await User.findAll({
+      where: {
+        role: "student",
+        [Op.or]: {
+          name: { [Op.like]: `%${keywords}%` },
+          account: { [Op.like]: `%${keywords}%` }
+        }
+      }
+    })
+  }
+  ctx.body = new ResBody({ data: { students, total: students.length } })
+})
+
+router.post("/addAdmin", async ctx => {
+  console.log(ctx.state)
+  const currentUserRole = ctx.state.user.role
+  if (currentUserRole !== "superAdmin") {
+    throw new Error("403-拒绝访问API")
+  }
+  let { name, account, phone, password, role } = ctx.request.body
+  utils.checkParams({ name, account, phone, password, role })
+  if ((await User.findByAccount(account)) !== null) {
+    const e = new Error("400-该学号/职工号已被注册")
+    throw e
+  }
+  let user = await User.create({ name, phone, account, password, role })
+  ctx.body = new ResBody({ data: user })
+})
+
+router.get("/getAdminTableData", async ctx => {
+  const admins = await User.findAll({
+    where: {
+      role: { [Op.or]: ["admin", "superAdmin"] }
+    },
+    include: [{ model: Building }]
+  })
+  ctx.body = new ResBody({ data: { admins, total: admins.length } })
+})
+
+router.get("/getStudentInfoByIdOrAccount", async ctx => {
+  const { type, value } = ctx.request.query
+  let userId = value
+  if (type !== "id") {
+    const user = await User.findOne({ where: { account: value } })
+    if (!user) {
+      throw new Error("无法找到该用户")
+    }
+    userId = user.id
+  }
+  const userInfo = await UserController.getStudentInfo(userId)
+  ctx.body = new ResBody({ data: userInfo })
 })
 
 module.exports = router.routes()

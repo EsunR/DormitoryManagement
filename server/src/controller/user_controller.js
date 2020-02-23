@@ -30,6 +30,7 @@ module.exports = {
     })
     return info
   },
+
   /**
    * 获取学生用户们的完整信息
    * @param {Array} users
@@ -52,6 +53,7 @@ module.exports = {
     }
     return cloneUsers
   },
+
   async setStudentRoomNull(id) {
     const student = await User.findOne({ where: { id, role: "student" } })
     const result = await student.update({ roomId: null })

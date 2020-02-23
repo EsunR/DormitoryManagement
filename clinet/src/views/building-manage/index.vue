@@ -90,7 +90,7 @@
     </el-dialog>
     <!-- 添加管理人员提示框 -->
 
-    <!-- 添加管理人员提示框 -->
+    <!-- 添加保洁人员提示框 -->
     <el-dialog
       title="保洁人员信息"
       :visible.sync="cleanerDialogVisible"
@@ -100,7 +100,10 @@
     >
       <div class="dialog-body">
         <h3>已有保洁员</h3>
-        <AdminCleanerTable :table-data="cleaners" />
+        <AdminCleanerTable
+          :table-data="cleaners"
+          @onDelete="handleDeleteCleaner"
+        />
         <h3>添加保洁员</h3>
         <el-form ref="cleanerForm" :inline="true" :model="cleanerForm">
           <el-form-item label="姓名" required prop="name">
@@ -126,7 +129,7 @@
         <el-button @click="cleanSelected">关 闭</el-button>
       </span>
     </el-dialog>
-    <!-- 添加管理人员提示框 -->
+    <!-- 添加保洁人员提示框 -->
   </div>
 </template>
 
@@ -134,7 +137,7 @@
 import BuildingAddForm from './components/BuildingAddForm'
 import AdminCleanerTable from './components/AdminCleanerTable'
 import AdminSearcher from './components/AdminSearcher'
-import { addCleaner } from '@/api/cleaner'
+import { addCleaner, delCleaner } from '@/api/cleaner'
 import {
   getBuildings,
   delBuilding,
@@ -261,6 +264,12 @@ export default {
         } else {
           this.$message({ type: 'error', message: '移除失败' })
         }
+      })
+    },
+    handleDeleteCleaner(id) {
+      delCleaner(id).then(() => {
+        this.$message.success('删除成功!')
+        this.fetchCleanerTableData()
       })
     }
   },

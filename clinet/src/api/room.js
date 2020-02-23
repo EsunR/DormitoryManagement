@@ -7,3 +7,11 @@ export function getRooms(params) {
     params
   })
 }
+
+export function getRoomInfo(roomId) {
+  return request({
+    url: '/room/getRoomInfo',
+    method: 'get',
+    params: { roomId }
+  })
+}

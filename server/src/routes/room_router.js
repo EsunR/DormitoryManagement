@@ -1,6 +1,6 @@
 const Router = require("koa-router")
 const ResBody = require("../struct/ResBody")
-const { Room, Floor, User } = require("../model")
+const { Room, Floor, User, Building } = require("../model")
 const router = new Router()
 
 router.get("/getRooms", async ctx => {
@@ -27,6 +27,15 @@ router.get("/getRooms", async ctx => {
   ctx.body = new ResBody({
     data: { rooms }
   })
+})
+
+router.get("/getRoomInfo", async ctx => {
+  const { roomId } = ctx.request.query
+  const roomInfo = await Room.findOne({
+    where: { id: roomId },
+    include: [{ model: Floor }, { model: Building }, { model: User }]
+  })
+  ctx.body = new ResBody({ data: roomInfo })
 })
 
 module.exports = router.routes()
