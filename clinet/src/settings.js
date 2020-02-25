@@ -1,35 +1,29 @@
 module.exports = {
-  title: 'Vue Element Admin',
+  title: '高校宿舍可视化管理系统',
 
   /**
    * @type {boolean} true | false
-   * @description Whether show the settings right-panel
+   * @description 是否显示右侧选项按钮
    */
   showSettings: true,
 
   /**
    * @type {boolean} true | false
-   * @description Whether need tagsView
+   * @description 是否显示标签导航
    */
   tagsView: true,
 
   /**
    * @type {boolean} true | false
-   * @description Whether fix the header
+   * @description 是否固定 head bar
    */
   fixedHeader: false,
 
   /**
    * @type {boolean} true | false
-   * @description Whether show the logo in sidebar
+   * @description 是否显示 Logo
    */
   sidebarLogo: true,
 
-  /**
-   * @type {string | array} 'production' | ['production', 'development']
-   * @description Need show err logs component.
-   * The default is only used in the production env
-   * If you want to also use it in dev, you can pass ['production', 'development']
-   */
   errorLog: 'production'
 }

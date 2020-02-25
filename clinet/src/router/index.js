@@ -253,7 +253,7 @@ export const asyncRoutes = [
       }
     ]
   },
-  // 404 page must be placed at the end !!!
+  // 404 页面要在最后引入
   { path: '*', redirect: '/404', hidden: true }
 ]
 
@@ -266,7 +266,6 @@ const createRouter = () =>
 
 const router = createRouter()
 
-// Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
 export function resetRouter() {
   const newRouter = createRouter()
   router.matcher = newRouter.matcher // reset router
