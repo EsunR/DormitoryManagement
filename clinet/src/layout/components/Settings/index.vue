@@ -12,7 +12,7 @@
       </div>
 
       <div class="drawer-item">
-        <span>显示面包屑</span>
+        <span>显示标签导航</span>
         <el-switch v-model="tagsView" class="drawer-switch" />
       </div>
 
