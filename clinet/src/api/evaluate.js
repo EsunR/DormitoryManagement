@@ -12,3 +12,19 @@ export function getEvaluates(params) {
     params
   })
 }
+
+export function addEvaluate({ note, score, roomId }) {
+  return request({
+    url: '/evaluate/addEvaluate',
+    method: 'post',
+    data: { note, score, roomId }
+  })
+}
+
+export function removeEvaluate(evaluateId) {
+  return request({
+    url: '/evaluate/removeEvaluate',
+    method: 'delete',
+    params: { evaluateId }
+  })
+}

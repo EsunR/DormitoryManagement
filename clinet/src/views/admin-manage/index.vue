@@ -37,7 +37,7 @@ import AdminTable from './components/AdminTable'
 
 import { getAdminTableData } from '@/api/user'
 export default {
-  name: 'AdminManage',
+  name: 'adminManage',
   components: {
     AddAdminForm,
     AdminTable

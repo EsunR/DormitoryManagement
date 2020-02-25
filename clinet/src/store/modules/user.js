@@ -91,7 +91,7 @@ const actions = {
           commit('SET_NAME', name || '欢迎您，新用户')
           commit(
             'SET_AVATAR',
-            avatar || 'http://img.cdn.esunr.xyz/github_avatar.jpeg'
+            avatar || 'http://study.esunr.xyz/1582549904311.png'
           )
           commit('SET_ROOM', room)
           commit('SET_FLOOR', floor)

@@ -110,6 +110,8 @@ router.get("/getRecordTableData", async ctx => {
   }
   current = current ? parseInt(current) : 1
   step = step ? parseInt(step) : 10
+  startTime = startTime ? parseInt(startTime) : undefined
+  endTime = endTime ? parseInt(endTime) : undefined
   let data = {
     count: 0,
     rows: []

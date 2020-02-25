@@ -155,6 +155,7 @@ module.exports = {
       : moment()
           .endOf("day")
           .toDate()
+    console.log("endTime: ", endTime)
     // 开始分情况获取数据
     let result
     if (userId) {
@@ -185,6 +186,12 @@ module.exports = {
       })
     } else if (floorId) {
       result = await GetupRecord.findAndCountAll({
+        where: {
+          createdAt: {
+            [Op.gt]: startTime,
+            [Op.lt]: endTime
+          }
+        },
         include: [
           {
             model: Room,
@@ -197,6 +204,12 @@ module.exports = {
       })
     } else if (buildingId) {
       result = await GetupRecord.findAndCountAll({
+        where: {
+          createdAt: {
+            [Op.gt]: startTime,
+            [Op.lt]: endTime
+          }
+        },
         include: [
           {
             model: Room,
@@ -209,6 +222,12 @@ module.exports = {
       })
     } else {
       result = await GetupRecord.findAndCountAll({
+        where: {
+          createdAt: {
+            [Op.gt]: startTime,
+            [Op.lt]: endTime
+          }
+        },
         limit: step,
         offset: step * (current - 1),
         order: [["createdAt", "DESC"]]
@@ -404,6 +423,12 @@ module.exports = {
       })
     } else if (floorId) {
       result = await BackRecord.findAndCountAll({
+        where: {
+          createdAt: {
+            [Op.gt]: startTime,
+            [Op.lt]: endTime
+          }
+        },
         include: [
           {
             model: Room,
@@ -416,6 +441,12 @@ module.exports = {
       })
     } else if (buildingId) {
       result = await BackRecord.findAndCountAll({
+        where: {
+          createdAt: {
+            [Op.gt]: startTime,
+            [Op.lt]: endTime
+          }
+        },
         include: [
           {
             model: Room,
@@ -428,6 +459,12 @@ module.exports = {
       })
     } else {
       result = await BackRecord.findAndCountAll({
+        where: {
+          createdAt: {
+            [Op.gt]: startTime,
+            [Op.lt]: endTime
+          }
+        },
         limit: step,
         offset: step * (current - 1),
         order: [["createdAt", "DESC"]]
@@ -598,6 +635,12 @@ module.exports = {
       })
     } else if (floorId) {
       result = await CleanRecord.findAndCountAll({
+        where: {
+          createdAt: {
+            [Op.gt]: startTime,
+            [Op.lt]: endTime
+          }
+        },
         include: [
           {
             model: Room,
@@ -610,6 +653,12 @@ module.exports = {
       })
     } else if (buildingId) {
       result = await CleanRecord.findAndCountAll({
+        where: {
+          createdAt: {
+            [Op.gt]: startTime,
+            [Op.lt]: endTime
+          }
+        },
         include: [
           {
             model: Room,
@@ -622,6 +671,12 @@ module.exports = {
       })
     } else {
       result = await CleanRecord.findAndCountAll({
+        where: {
+          createdAt: {
+            [Op.gt]: startTime,
+            [Op.lt]: endTime
+          }
+        },
         limit: step,
         offset: step * (current - 1),
         order: [["createdAt", "DESC"]]

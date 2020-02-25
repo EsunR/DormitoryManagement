@@ -3,7 +3,7 @@
     <!-- 宿舍楼选择 -->
     <div class="selector-item" v-if="selectorData.buildingId !== undefined">
       <span class="label">宿舍楼</span>
-      <el-select v-model="groupData.buildingId" placeholder="请选择">
+      <el-select v-model="groupData.buildingId" placeholder="请选择" clearable>
         <el-option
           v-for="item in buildingsData"
           :key="item.id"
@@ -21,7 +21,8 @@
       <el-select
         v-model="groupData.floorId"
         placeholder="请选择"
-        :disabled="groupData.buildingId === null"
+        :disabled="!groupData.buildingId"
+        clearable
       >
         <el-option
           v-for="item in floorsData"
@@ -40,7 +41,8 @@
       <el-select
         v-model="groupData.roomId"
         placeholder="请选择"
-        :disabled="groupData.floorId === null"
+        :disabled="!groupData.floorId"
+        clearable
       >
         <el-option
           v-for="item in roomsData"
@@ -59,7 +61,8 @@
       <el-select
         v-model="groupData.userId"
         placeholder="请选择"
-        :disabled="groupData.roomId === null"
+        :disabled="!groupData.roomId"
+        clearable
       >
         <el-option
           v-for="item in usersData"

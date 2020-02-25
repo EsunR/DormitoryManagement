@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <div class="user-bio">
+    <div class="user-bio" v-if="user.role === 'student'">
       <div class="user-skills user-bio-section">
         <div class="user-bio-section-header">
           <svg-icon icon-class="skill" /><span>个人效绩</span>
@@ -61,7 +61,7 @@ export default {
           name: '',
           email: '',
           avatar: '',
-          roles: ''
+          role: ''
         }
       }
     }
@@ -76,9 +76,9 @@ export default {
   mounted() {
     getUserProbability().then(res => {
       const { getup, back, clean } = res.data
-      this.getup = getup * 100
-      this.back = back * 100
-      this.clean = clean * 100
+      this.getup = Number((getup * 100).toFixed(2))
+      this.back = Number((back * 100).toFixed(2))
+      this.clean = Number((clean * 100).toFixed(2))
     })
   }
 }

@@ -149,7 +149,13 @@ router.post("/addAdmin", async ctx => {
     const e = new Error("400-该学号/职工号已被注册")
     throw e
   }
-  let user = await User.create({ name, phone, account, password, role })
+  let user = await User.create({
+    name,
+    phone,
+    account,
+    password: bcypt.hash(password),
+    role
+  })
   ctx.body = new ResBody({ data: user })
 })
 

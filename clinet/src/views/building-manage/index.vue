@@ -147,7 +147,7 @@ import {
   removeBuildingAdmin
 } from '@/api/building'
 export default {
-  name: 'BuildingManage',
+  name: 'buildingManage',
   components: {
     BuildingAddForm,
     AdminCleanerTable,
