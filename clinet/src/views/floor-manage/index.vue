@@ -33,7 +33,7 @@ import { getCleanerTableData } from '@/api/building'
 
 import { getFloorsDetail } from '@/api/floor'
 export default {
-  name: 'FloorManage',
+  name: 'floorManage',
   components: {
     GroupSelector,
     FloorInfoCard

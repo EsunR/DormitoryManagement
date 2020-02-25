@@ -1,9 +1,9 @@
 <template>
   <div class="drawer-container">
     <div>
-      <h3 class="drawer-title">Page style setting</h3>
+      <h3 class="drawer-title">页面样式设置</h3>
 
-      <div class="drawer-item">
+      <div class="drawer-item" v-if="false">
         <span>Theme Color</span>
         <theme-picker
           style="float: right;height: 26px;margin: -3px 8px 0 0;"
@@ -12,17 +12,17 @@
       </div>
 
       <div class="drawer-item">
-        <span>Open Tags-View</span>
+        <span>显示面包屑</span>
         <el-switch v-model="tagsView" class="drawer-switch" />
       </div>
 
       <div class="drawer-item">
-        <span>Fixed Header</span>
+        <span>固定顶栏</span>
         <el-switch v-model="fixedHeader" class="drawer-switch" />
       </div>
 
       <div class="drawer-item">
-        <span>Sidebar Logo</span>
+        <span>侧边栏Logo</span>
         <el-switch v-model="sidebarLogo" class="drawer-switch" />
       </div>
     </div>

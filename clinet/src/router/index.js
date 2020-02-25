@@ -217,6 +217,42 @@ export const asyncRoutes = [
       }
     ]
   },
+  {
+    path: '/recordManage',
+    component: Layout,
+    meta: {
+      roles: ['superAdmin', 'admin'],
+      title: '记录查看',
+      icon: 'tree'
+    },
+    children: [
+      {
+        path: '/recordManage/getup',
+        component: () => import('@/views/record-manage/getup-record-manage'),
+        name: 'getupRecordManage',
+        meta: {
+          title: '起床记录'
+        }
+      },
+      {
+        path: '/recordManage/back',
+        component: () => import('@/views/record-manage/back-record-manage'),
+        name: 'backRecordManage',
+        meta: {
+          title: '归宿记录'
+        }
+      },
+      {
+        path: '/recordManage/clean',
+        component: () => import('@/views/record-manage/clean-record-manage'),
+        name: 'cleanRecordManage',
+        meta: {
+          title: '清扫记录',
+          noCache: true
+        }
+      }
+    ]
+  },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

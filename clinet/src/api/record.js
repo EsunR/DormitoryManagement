@@ -64,12 +64,22 @@ export function getUserProbability(userId) {
   - buildingId （可选）
   - floorId（可选）
   - roomId (可选)
+  - userId(可选)
   - startTime: 起始时间（可选）
   - endTime：结束时间（可选）
  */
 export function getRecordTableData(
   type,
-  { current, step, buildingId, floorId, startTime, endTime }
+  {
+    current = undefined,
+    step = undefined,
+    buildingId = undefined,
+    floorId = undefined,
+    roomId = undefined,
+    userId = undefined,
+    startTime = undefined,
+    endTime = undefined
+  }
 ) {
   return request({
     url: '/record/getRecordTableData',
@@ -80,6 +90,8 @@ export function getRecordTableData(
       step,
       buildingId,
       floorId,
+      roomId,
+      userId,
       startTime,
       endTime
     }

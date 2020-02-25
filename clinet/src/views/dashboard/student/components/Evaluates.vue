@@ -13,7 +13,18 @@
             <div class="note">评价：{{ evaluate.note }}</div>
           </div>
           <div class="bottom">
-            <div class="creator">评价人: {{ evaluate.userName }}</div>
+            <div class="creator">
+              <span style="margin-right: 5px"
+                >评价人: {{ evaluate.userName }}</span
+              >
+              <el-button
+                v-if="evaluate.userId === userId"
+                size="mini"
+                type="danger"
+                @click="handleDelete(evaluate.id)"
+                >删除</el-button
+              >
+            </div>
             <div class="time">
               {{ evaluate.createdAt | formatDate('YYYY年MM月DD日 HH:mm') }}
             </div>
@@ -26,6 +37,7 @@
 </template>
 
 <script>
+import { removeEvaluate } from '@/api/evaluate'
 export default {
   data() {
     return {}
@@ -34,6 +46,11 @@ export default {
     evaluatesData: {
       type: Array,
       required: true
+    }
+  },
+  computed: {
+    userId() {
+      return this.$store.getters.allUserInfo.id
     }
   },
   methods: {
@@ -54,6 +71,18 @@ export default {
       } else {
         return '#ff4949'
       }
+    },
+    handleDelete(evaluateId) {
+      this.$confirm('确认要删除该条评论', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        removeEvaluate(evaluateId).then(() => {
+          this.$message.success('删除成功')
+          this.$emit('afterDel')
+        })
+      })
     }
   }
 }
@@ -85,6 +114,7 @@ export default {
     color: rgba($color: #000000, $alpha: 0.5);
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 }
 .tips {

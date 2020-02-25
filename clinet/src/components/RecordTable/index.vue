@@ -5,10 +5,23 @@
     </div>
     <div class="table-wrapper">
       <el-table :data="tableData" style="width: 100%">
-        <el-table-column prop="name" label="姓名"> </el-table-column>
+        <el-table-column label="姓名">
+          <template slot-scope="scope">
+            <a @click="gotoStudentInfo(scope.row.userId)">{{
+              scope.row.name
+            }}</a>
+          </template>
+        </el-table-column>
         <el-table-column prop="account" label="学号"> </el-table-column>
         <el-table-column prop="buildingName" label="宿舍楼"> </el-table-column>
         <el-table-column prop="floorLayer" label="楼层"> </el-table-column>
+        <el-table-column prop="roomNumber" label="宿舍号">
+          <template slot-scope="scope">
+            <a @click="gotoRoomInfo(scope.row.roomId)">{{
+              scope.row.roomNumber
+            }}</a>
+          </template>
+        </el-table-column>
         <el-table-column prop="date" label="日期"> </el-table-column>
         <el-table-column prop="time" label="时间"> </el-table-column>
         <el-table-column
@@ -93,6 +106,14 @@ export default {
           return '记录值'
       }
     }
+  },
+  methods: {
+    gotoStudentInfo(userId) {
+      this.$router.push({ name: 'userInfo', query: { userId } })
+    },
+    gotoRoomInfo(roomId) {
+      this.$router.push({ name: 'roomInfo', query: { roomId } })
+    }
   }
 }
 </script>
@@ -127,6 +148,12 @@ export default {
     .early-bdge-green {
       background-color: $color-success;
     }
+  }
+}
+a {
+  color: $color-primary;
+  &:hover {
+    text-decoration: underline;
   }
 }
 </style>
