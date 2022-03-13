@@ -4,3 +4,4 @@ src/router/*.js
 public
 dist
 vue.config.js
+node_modules
