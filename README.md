@@ -1,10 +1,10 @@
 # 0. 预览
 
+基于 Koa 以及 VueJS 的宿舍管理系统。
+
 线上预览：https://www.esunr.xyz/dormitory
 
 ![](http://study.esunr.xyz/1583661197624.jpg)
-
-基于 Koa 以及 VueJS 的宿舍管理系统。
 
 # 1. 需求分析
 
