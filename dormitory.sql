@@ -38,10 +38,10 @@ INSERT INTO `admins` VALUES ('2020-02-22 14:59:08', '2020-02-22 14:59:08', '6', 
 INSERT INTO `admins` VALUES ('2020-02-24 14:22:51', '2020-02-24 14:22:51', '7', '12');
 
 -- ----------------------------
--- Table structure for backrecords
+-- Table structure for backRecords
 -- ----------------------------
-DROP TABLE IF EXISTS `backrecords`;
-CREATE TABLE `backrecords` (
+DROP TABLE IF EXISTS `backRecords`;
+CREATE TABLE `backRecords` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
@@ -50,25 +50,25 @@ CREATE TABLE `backrecords` (
   `roomId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `roomId` (`roomId`),
-  CONSTRAINT `backrecords_ibfk_1` FOREIGN KEY (`roomId`) REFERENCES `rooms` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+  CONSTRAINT `backRecords_ibfk_1` FOREIGN KEY (`roomId`) REFERENCES `rooms` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of backrecords
+-- Records of backRecords
 -- ----------------------------
-INSERT INTO `backrecords` VALUES ('1', '2020-02-15 17:47:55', '2020-02-15 17:47:55', null, '1', '1');
-INSERT INTO `backrecords` VALUES ('2', '2020-02-17 13:56:02', '2020-02-17 22:56:55', null, '1', '1');
-INSERT INTO `backrecords` VALUES ('3', '2020-02-17 13:56:02', '2020-02-18 19:04:43', null, '4', '1');
-INSERT INTO `backrecords` VALUES ('4', '2020-02-01 13:56:02', '2020-02-17 13:56:02', null, '5', '1');
-INSERT INTO `backrecords` VALUES ('5', '2020-02-02 13:56:02', '2020-02-01 13:56:02', null, '5', '1');
-INSERT INTO `backrecords` VALUES ('6', '2020-02-03 13:56:02', '2020-02-01 13:56:02', null, '5', '1');
-INSERT INTO `backrecords` VALUES ('7', '2020-02-19 12:43:57', '2020-02-19 12:43:57', null, '1', '1');
-INSERT INTO `backrecords` VALUES ('14', '2020-02-21 14:27:53', '2020-02-21 14:27:53', null, '6', '2');
-INSERT INTO `backrecords` VALUES ('15', '2020-02-22 12:31:26', '2020-02-22 12:31:26', null, '1', '1');
-INSERT INTO `backrecords` VALUES ('16', '2020-02-22 14:44:39', '2020-02-22 14:44:39', null, '6', '2');
-INSERT INTO `backrecords` VALUES ('17', '2020-02-24 11:49:19', '2020-02-24 11:49:19', null, '5', '1');
-INSERT INTO `backrecords` VALUES ('18', '2020-02-24 14:08:36', '2020-02-24 14:08:36', null, '11', '1');
-INSERT INTO `backrecords` VALUES ('19', '2020-02-24 14:36:11', '2020-02-24 14:36:11', null, '1', '1');
+INSERT INTO `backRecords` VALUES ('1', '2020-02-15 17:47:55', '2020-02-15 17:47:55', null, '1', '1');
+INSERT INTO `backRecords` VALUES ('2', '2020-02-17 13:56:02', '2020-02-17 22:56:55', null, '1', '1');
+INSERT INTO `backRecords` VALUES ('3', '2020-02-17 13:56:02', '2020-02-18 19:04:43', null, '4', '1');
+INSERT INTO `backRecords` VALUES ('4', '2020-02-01 13:56:02', '2020-02-17 13:56:02', null, '5', '1');
+INSERT INTO `backRecords` VALUES ('5', '2020-02-02 13:56:02', '2020-02-01 13:56:02', null, '5', '1');
+INSERT INTO `backRecords` VALUES ('6', '2020-02-03 13:56:02', '2020-02-01 13:56:02', null, '5', '1');
+INSERT INTO `backRecords` VALUES ('7', '2020-02-19 12:43:57', '2020-02-19 12:43:57', null, '1', '1');
+INSERT INTO `backRecords` VALUES ('14', '2020-02-21 14:27:53', '2020-02-21 14:27:53', null, '6', '2');
+INSERT INTO `backRecords` VALUES ('15', '2020-02-22 12:31:26', '2020-02-22 12:31:26', null, '1', '1');
+INSERT INTO `backRecords` VALUES ('16', '2020-02-22 14:44:39', '2020-02-22 14:44:39', null, '6', '2');
+INSERT INTO `backRecords` VALUES ('17', '2020-02-24 11:49:19', '2020-02-24 11:49:19', null, '5', '1');
+INSERT INTO `backRecords` VALUES ('18', '2020-02-24 14:08:36', '2020-02-24 14:08:36', null, '11', '1');
+INSERT INTO `backRecords` VALUES ('19', '2020-02-24 14:36:11', '2020-02-24 14:36:11', null, '1', '1');
 
 -- ----------------------------
 -- Table structure for buildings
@@ -120,10 +120,10 @@ INSERT INTO `cleaners` VALUES ('5', '测试阿姨', '12333333333', '2020-02-22 1
 INSERT INTO `cleaners` VALUES ('6', '测试保洁员', '12333333333', '2020-02-24 14:23:47', '2020-02-24 14:23:47', null, '7');
 
 -- ----------------------------
--- Table structure for cleanrecords
+-- Table structure for cleanRecords
 -- ----------------------------
-DROP TABLE IF EXISTS `cleanrecords`;
-CREATE TABLE `cleanrecords` (
+DROP TABLE IF EXISTS `cleanRecords`;
+CREATE TABLE `cleanRecords` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
@@ -132,21 +132,21 @@ CREATE TABLE `cleanrecords` (
   `roomId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `roomId` (`roomId`),
-  CONSTRAINT `cleanrecords_ibfk_1` FOREIGN KEY (`roomId`) REFERENCES `rooms` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+  CONSTRAINT `cleanRecords_ibfk_1` FOREIGN KEY (`roomId`) REFERENCES `rooms` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of cleanrecords
+-- Records of cleanRecords
 -- ----------------------------
-INSERT INTO `cleanrecords` VALUES ('1', '2020-02-12 21:46:16', '2020-02-19 21:46:22', null, '1', '1');
-INSERT INTO `cleanrecords` VALUES ('2', '2020-02-16 12:22:36', '2020-02-19 21:46:39', null, '1', '1');
-INSERT INTO `cleanrecords` VALUES ('3', '2020-02-19 14:12:22', '2020-02-19 22:12:54', null, '4', '1');
-INSERT INTO `cleanrecords` VALUES ('5', '2020-02-20 07:00:37', '2020-02-20 07:00:37', null, '1', '1');
-INSERT INTO `cleanrecords` VALUES ('6', '2020-02-21 08:56:01', '2020-02-21 08:56:01', null, '6', '2');
-INSERT INTO `cleanrecords` VALUES ('7', '2020-02-21 10:20:59', '2020-02-21 10:20:59', null, '1', '1');
-INSERT INTO `cleanrecords` VALUES ('8', '2020-02-21 17:26:48', '2020-02-21 17:26:48', null, '1', '1');
-INSERT INTO `cleanrecords` VALUES ('9', '2020-02-22 14:44:43', '2020-02-22 14:44:43', null, '6', '2');
-INSERT INTO `cleanrecords` VALUES ('10', '2020-02-24 11:49:17', '2020-02-24 11:49:17', null, '5', '1');
+INSERT INTO `cleanRecords` VALUES ('1', '2020-02-12 21:46:16', '2020-02-19 21:46:22', null, '1', '1');
+INSERT INTO `cleanRecords` VALUES ('2', '2020-02-16 12:22:36', '2020-02-19 21:46:39', null, '1', '1');
+INSERT INTO `cleanRecords` VALUES ('3', '2020-02-19 14:12:22', '2020-02-19 22:12:54', null, '4', '1');
+INSERT INTO `cleanRecords` VALUES ('5', '2020-02-20 07:00:37', '2020-02-20 07:00:37', null, '1', '1');
+INSERT INTO `cleanRecords` VALUES ('6', '2020-02-21 08:56:01', '2020-02-21 08:56:01', null, '6', '2');
+INSERT INTO `cleanRecords` VALUES ('7', '2020-02-21 10:20:59', '2020-02-21 10:20:59', null, '1', '1');
+INSERT INTO `cleanRecords` VALUES ('8', '2020-02-21 17:26:48', '2020-02-21 17:26:48', null, '1', '1');
+INSERT INTO `cleanRecords` VALUES ('9', '2020-02-22 14:44:43', '2020-02-22 14:44:43', null, '6', '2');
+INSERT INTO `cleanRecords` VALUES ('10', '2020-02-24 11:49:17', '2020-02-24 11:49:17', null, '5', '1');
 
 -- ----------------------------
 -- Table structure for evaluates
@@ -224,10 +224,10 @@ INSERT INTO `floors` VALUES ('24', '2', '7', '2020-02-24 14:22:25', '2020-02-24 
 INSERT INTO `floors` VALUES ('25', '3', '7', '2020-02-24 14:22:25', '2020-02-24 14:22:25', null, null);
 
 -- ----------------------------
--- Table structure for getuprecords
+-- Table structure for getupRecords
 -- ----------------------------
-DROP TABLE IF EXISTS `getuprecords`;
-CREATE TABLE `getuprecords` (
+DROP TABLE IF EXISTS `getupRecords`;
+CREATE TABLE `getupRecords` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
@@ -236,29 +236,29 @@ CREATE TABLE `getuprecords` (
   `roomId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `roomId` (`roomId`),
-  CONSTRAINT `getuprecords_ibfk_1` FOREIGN KEY (`roomId`) REFERENCES `rooms` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+  CONSTRAINT `getupRecords_ibfk_1` FOREIGN KEY (`roomId`) REFERENCES `rooms` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of getuprecords
+-- Records of getupRecords
 -- ----------------------------
-INSERT INTO `getuprecords` VALUES ('8', '2020-02-15 12:11:17', '2020-02-15 12:11:17', null, '4', '1');
-INSERT INTO `getuprecords` VALUES ('9', '2020-02-16 12:12:00', '2020-02-16 12:12:00', null, '1', '1');
-INSERT INTO `getuprecords` VALUES ('13', '2020-02-16 17:16:14', '2020-02-16 17:16:14', null, '1', '1');
-INSERT INTO `getuprecords` VALUES ('14', '2020-02-01 21:24:26', '2020-02-01 21:24:31', null, '1', '1');
-INSERT INTO `getuprecords` VALUES ('16', '2020-02-18 11:06:43', '2020-02-18 11:06:43', null, '1', '1');
-INSERT INTO `getuprecords` VALUES ('17', '2020-02-19 12:41:58', '2020-02-19 12:41:58', null, '1', '1');
-INSERT INTO `getuprecords` VALUES ('27', '2020-02-21 14:25:18', '2020-02-21 14:25:18', null, '6', '2');
-INSERT INTO `getuprecords` VALUES ('28', '2020-02-22 12:31:23', '2020-02-22 12:31:23', null, '1', '1');
-INSERT INTO `getuprecords` VALUES ('29', '2020-02-22 14:44:37', '2020-02-22 14:44:37', null, '6', '2');
-INSERT INTO `getuprecords` VALUES ('30', '2020-02-24 11:49:22', '2020-02-24 11:49:22', null, '5', '1');
-INSERT INTO `getuprecords` VALUES ('31', '2020-01-09 19:51:21', '2020-02-06 19:51:28', null, '4', '1');
-INSERT INTO `getuprecords` VALUES ('32', '2020-01-17 19:51:43', '2020-02-24 19:51:50', null, '5', '1');
-INSERT INTO `getuprecords` VALUES ('33', '2020-01-24 19:52:03', '2020-02-24 19:52:08', null, '5', '1');
-INSERT INTO `getuprecords` VALUES ('34', '2020-01-17 19:52:18', '2020-02-24 19:52:23', null, '5', '1');
-INSERT INTO `getuprecords` VALUES ('35', '2020-01-17 19:52:30', '2020-02-05 19:52:34', null, '1', '1');
-INSERT INTO `getuprecords` VALUES ('36', '2020-01-18 19:52:43', '2020-02-24 19:52:49', null, '1', '1');
-INSERT INTO `getuprecords` VALUES ('37', '2020-02-24 14:08:05', '2020-02-24 14:08:05', null, '11', '1');
+INSERT INTO `getupRecords` VALUES ('8', '2020-02-15 12:11:17', '2020-02-15 12:11:17', null, '4', '1');
+INSERT INTO `getupRecords` VALUES ('9', '2020-02-16 12:12:00', '2020-02-16 12:12:00', null, '1', '1');
+INSERT INTO `getupRecords` VALUES ('13', '2020-02-16 17:16:14', '2020-02-16 17:16:14', null, '1', '1');
+INSERT INTO `getupRecords` VALUES ('14', '2020-02-01 21:24:26', '2020-02-01 21:24:31', null, '1', '1');
+INSERT INTO `getupRecords` VALUES ('16', '2020-02-18 11:06:43', '2020-02-18 11:06:43', null, '1', '1');
+INSERT INTO `getupRecords` VALUES ('17', '2020-02-19 12:41:58', '2020-02-19 12:41:58', null, '1', '1');
+INSERT INTO `getupRecords` VALUES ('27', '2020-02-21 14:25:18', '2020-02-21 14:25:18', null, '6', '2');
+INSERT INTO `getupRecords` VALUES ('28', '2020-02-22 12:31:23', '2020-02-22 12:31:23', null, '1', '1');
+INSERT INTO `getupRecords` VALUES ('29', '2020-02-22 14:44:37', '2020-02-22 14:44:37', null, '6', '2');
+INSERT INTO `getupRecords` VALUES ('30', '2020-02-24 11:49:22', '2020-02-24 11:49:22', null, '5', '1');
+INSERT INTO `getupRecords` VALUES ('31', '2020-01-09 19:51:21', '2020-02-06 19:51:28', null, '4', '1');
+INSERT INTO `getupRecords` VALUES ('32', '2020-01-17 19:51:43', '2020-02-24 19:51:50', null, '5', '1');
+INSERT INTO `getupRecords` VALUES ('33', '2020-01-24 19:52:03', '2020-02-24 19:52:08', null, '5', '1');
+INSERT INTO `getupRecords` VALUES ('34', '2020-01-17 19:52:18', '2020-02-24 19:52:23', null, '5', '1');
+INSERT INTO `getupRecords` VALUES ('35', '2020-01-17 19:52:30', '2020-02-05 19:52:34', null, '1', '1');
+INSERT INTO `getupRecords` VALUES ('36', '2020-01-18 19:52:43', '2020-02-24 19:52:49', null, '1', '1');
+INSERT INTO `getupRecords` VALUES ('37', '2020-02-24 14:08:05', '2020-02-24 14:08:05', null, '11', '1');
 
 -- ----------------------------
 -- Table structure for rooms

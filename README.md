@@ -217,6 +217,8 @@ Koa 中间件，详见 Koa 中间件机制。
 
 ![](http://img.cdn.esunr.xyz/markdown/20200225211018.png)
 
+> 如果 mysql 为高版本，选择 utf8mb4
+
 将 `dormitory.sql` 文件写入该表，完成数据初始化。
 
 修改 `/server/src/config.js` 文件下的数据库地址、用户名、密码。
