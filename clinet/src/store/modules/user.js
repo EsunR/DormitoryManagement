@@ -89,10 +89,7 @@ const actions = {
           // 设置用户信息
           commit('SET_ROLES', roles)
           commit('SET_NAME', name || '欢迎您，新用户')
-          commit(
-            'SET_AVATAR',
-            avatar || 'http://study.esunr.xyz/1582549904311.png'
-          )
+          commit('SET_AVATAR', avatar || require('@/assets/avatar.jpg'))
           commit('SET_ROOM', room)
           commit('SET_FLOOR', floor)
           commit('SET_BUILDING', building)

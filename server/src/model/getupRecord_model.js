@@ -1,9 +1,9 @@
 const db = require("../db/index")
 const { Model } = require("sequelize")
 
-class GetupRedcord extends Model {}
+class GetupRecord extends Model {}
 
-GetupRedcord.init(
+GetupRecord.init(
   {},
   {
     sequelize: db.sequelize,
@@ -12,4 +12,4 @@ GetupRedcord.init(
   }
 )
 
-module.exports = GetupRedcord
+module.exports = GetupRecord

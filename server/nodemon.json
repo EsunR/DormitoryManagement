@@ -1,0 +1,10 @@
+{
+    "watch": [
+      "./src"
+    ],
+    "exec": "node -r dotenv/config",
+    "ext": "ts, js",
+    "env": {
+      "NODE_ENV": "development"
+    }
+  }
