@@ -104,7 +104,7 @@ export default {
   background-color: #fff;
   border-radius: 5px;
   margin-top: 40px;
-  >>> .form {
+  ::v-deep .form {
     .el-cascader {
       width: 100%;
     }
