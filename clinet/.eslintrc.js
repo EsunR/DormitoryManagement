@@ -60,6 +60,7 @@ module.exports = {
     // 不允许使用分号
     semi: ['error', 'never'],
     // 必须使用双引号包裹字符串
-    quotes: ['error', 'single']
+    quotes: ['error', 'single'],
+    "no-unused-vars": "off",
   }
 }

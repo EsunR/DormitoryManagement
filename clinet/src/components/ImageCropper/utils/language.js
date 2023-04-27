@@ -53,13 +53,15 @@ export default {
     error: {
       onlyImg: 'Image only',
       outOfSize: 'Image exceeds size limit: ',
-      lowestPx: 'Image\'s size is too low. Expected at least: '
+      // eslint-disable-next-line quotes
+      lowestPx: "Image's size is too low. Expected at least: "
     }
   },
   ro: {
     hint: 'Atinge sau trage fișierul aici',
     loading: 'Se încarcă',
-    noSupported: 'Browser-ul tău nu suportă acest feature. Te rugăm încearcă cu alt browser.',
+    noSupported:
+      'Browser-ul tău nu suportă acest feature. Te rugăm încearcă cu alt browser.',
     success: 'S-a încărcat cu succes',
     fail: 'A apărut o problemă la încărcare',
     preview: 'Previzualizează',
@@ -80,7 +82,8 @@ export default {
   ru: {
     hint: 'Нажмите, или перетащите файл в это окно',
     loading: 'Загружаю……',
-    noSupported: 'Ваш браузер не поддерживается, пожалуйста, используйте IE10 + или другие браузеры',
+    noSupported:
+      'Ваш браузер не поддерживается, пожалуйста, используйте IE10 + или другие браузеры',
     success: 'Загрузка выполнена успешно',
     fail: 'Ошибка загрузки',
     preview: 'Предпросмотр',
@@ -118,7 +121,9 @@ export default {
   fr: {
     hint: 'Cliquez ou glissez le fichier ici.',
     loading: 'Téléchargement…',
-    noSupported: 'Votre navigateur n\'est pas supporté. Utilisez IE10 + ou un autre navigateur s\'il vous plaît.',
+    noSupported:
+      // eslint-disable-next-line quotes
+      "Votre navigateur n'est pas supporté. Utilisez IE10 + ou un autre navigateur s'il vous plaît.",
     success: 'Téléchargement réussit',
     fail: 'Téléchargement echoué',
     preview: 'Aperçu',
@@ -130,14 +135,17 @@ export default {
     },
     error: {
       onlyImg: 'Image uniquement',
-      outOfSize: 'L\'image sélectionnée dépasse la taille maximum: ',
-      lowestPx: 'L\'image sélectionnée est trop petite. Dimensions attendues: '
+      // eslint-disable-next-line quotes
+      outOfSize: "L'image sélectionnée dépasse la taille maximum: ",
+      // eslint-disable-next-line quotes
+      lowestPx: "L'image sélectionnée est trop petite. Dimensions attendues: "
     }
   },
   nl: {
     hint: 'Klik hier of sleep een afbeelding in dit vlak',
     loading: 'Uploaden…',
-    noSupported: 'Je browser wordt helaas niet ondersteund. Gebruik IE10+ of een andere browser.',
+    noSupported:
+      'Je browser wordt helaas niet ondersteund. Gebruik IE10+ of een andere browser.',
     success: 'Upload succesvol',
     fail: 'Upload mislukt',
     preview: 'Voorbeeld',
@@ -156,7 +164,8 @@ export default {
   tr: {
     hint: 'Tıkla veya yüklemek istediğini buraya sürükle',
     loading: 'Yükleniyor…',
-    noSupported: 'Tarayıcı desteklenmiyor, lütfen IE10+ veya farklı tarayıcı kullanın',
+    noSupported:
+      'Tarayıcı desteklenmiyor, lütfen IE10+ veya farklı tarayıcı kullanın',
     success: 'Yükleme başarılı',
     fail: 'Yüklemede hata oluştu',
     preview: 'Önizle',
@@ -175,7 +184,8 @@ export default {
   'es-MX': {
     hint: 'Selecciona o arrastra una imagen',
     loading: 'Subiendo...',
-    noSupported: 'Tu navegador no es soportado, porfavor usa IE10+ u otros navegadores mas recientes',
+    noSupported:
+      'Tu navegador no es soportado, porfavor usa IE10+ u otros navegadores mas recientes',
     success: 'Subido exitosamente',
     fail: 'Sucedió un error',
     preview: 'Vista previa',
@@ -194,7 +204,8 @@ export default {
   de: {
     hint: 'Klick hier oder zieh eine Datei hier rein zum Hochladen',
     loading: 'Hochladen…',
-    noSupported: 'Browser wird nicht unterstützt, bitte verwende IE10+ oder andere Browser',
+    noSupported:
+      'Browser wird nicht unterstützt, bitte verwende IE10+ oder andere Browser',
     success: 'Upload erfolgreich',
     fail: 'Upload fehlgeschlagen',
     preview: 'Vorschau',
@@ -213,7 +224,8 @@ export default {
   ja: {
     hint: 'クリック・ドラッグしてファイルをアップロード',
     loading: 'アップロード中...',
-    noSupported: 'このブラウザは対応されていません。IE10+かその他の主要ブラウザをお使いください。',
+    noSupported:
+      'このブラウザは対応されていません。IE10+かその他の主要ブラウザをお使いください。',
     success: 'アップロード成功',
     fail: 'アップロード失敗',
     preview: 'プレビュー',

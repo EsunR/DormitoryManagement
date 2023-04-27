@@ -20,8 +20,16 @@
             <i class="vicp-icon1-bottom" />
           </i>
           <span v-show="loading !== 1" class="vicp-hint">{{ lang.hint }}</span>
-          <span v-show="!isSupported" class="vicp-no-supported-hint">{{ lang.noSupported }}</span>
-          <input v-show="false" v-if="step == 1" ref="fileinput" type="file" @change="handleChange">
+          <span v-show="!isSupported" class="vicp-no-supported-hint">{{
+            lang.noSupported
+          }}</span>
+          <input
+            v-show="false"
+            v-if="step == 1"
+            ref="fileinput"
+            type="file"
+            @change="handleChange"
+          />
         </div>
         <div v-show="hasError" class="vicp-error">
           <i class="vicp-icon2" />
@@ -57,9 +65,15 @@
                 @mousemove="imgMove"
                 @mouseup="createImg"
                 @mouseout="createImg"
-              >
-              <div :style="sourceImgShadeStyle" class="vicp-img-shade vicp-img-shade-1" />
-              <div :style="sourceImgShadeStyle" class="vicp-img-shade vicp-img-shade-2" />
+              />
+              <div
+                :style="sourceImgShadeStyle"
+                class="vicp-img-shade vicp-img-shade-1"
+              />
+              <div
+                :style="sourceImgShadeStyle"
+                class="vicp-img-shade vicp-img-shade-2"
+              />
             </div>
 
             <div class="vicp-range">
@@ -70,7 +84,7 @@
                 min="0"
                 max="100"
                 @input="zoomChange"
-              >
+              />
               <i
                 class="vicp-icon5"
                 @mousedown="startZoomSub"
@@ -86,18 +100,31 @@
             </div>
 
             <div v-if="!noRotate" class="vicp-rotate">
-              <i @mousedown="startRotateLeft" @mouseout="endRotate" @mouseup="endRotate">↺</i>
-              <i @mousedown="startRotateRight" @mouseout="endRotate" @mouseup="endRotate">↻</i>
+              <i
+                @mousedown="startRotateLeft"
+                @mouseout="endRotate"
+                @mouseup="endRotate"
+                >↺</i
+              >
+              <i
+                @mousedown="startRotateRight"
+                @mouseout="endRotate"
+                @mouseup="endRotate"
+                >↻</i
+              >
             </div>
           </div>
           <div v-show="true" class="vicp-crop-right">
             <div class="vicp-preview">
               <div v-if="!noSquare" class="vicp-preview-item">
-                <img :src="createImgUrl" :style="previewStyle">
+                <img :src="createImgUrl" :style="previewStyle" />
                 <span>{{ lang.preview }}</span>
               </div>
-              <div v-if="!noCircle" class="vicp-preview-item vicp-preview-item-circle">
-                <img :src="createImgUrl" :style="previewStyle">
+              <div
+                v-if="!noCircle"
+                class="vicp-preview-item vicp-preview-item-circle"
+              >
+                <img :src="createImgUrl" :style="previewStyle" />
                 <span>{{ lang.preview }}</span>
               </div>
             </div>
@@ -105,15 +132,26 @@
         </div>
         <div class="vicp-operate">
           <a @click="setStep(1)" @mousedown="ripple">{{ lang.btn.back }}</a>
-          <a class="vicp-operate-btn" @click="prepareUpload" @mousedown="ripple">{{ lang.btn.save }}</a>
+          <a
+            class="vicp-operate-btn"
+            @click="prepareUpload"
+            @mousedown="ripple"
+            >{{ lang.btn.save }}</a
+          >
         </div>
       </div>
 
       <div v-if="step == 3" class="vicp-step3">
         <div class="vicp-upload">
-          <span v-show="loading === 1" class="vicp-loading">{{ lang.loading }}</span>
+          <span v-show="loading === 1" class="vicp-loading">{{
+            lang.loading
+          }}</span>
           <div class="vicp-progress-wrap">
-            <span v-show="loading === 1" :style="progressStyle" class="vicp-progress" />
+            <span
+              v-show="loading === 1"
+              :style="progressStyle"
+              class="vicp-progress"
+            />
           </div>
           <div v-show="hasError" class="vicp-error">
             <i class="vicp-icon2" />
@@ -919,7 +957,7 @@ export default {
 .vue-image-crop-upload .vicp-wrap .vicp-close .vicp-icon4::before {
   -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);
-  content: "";
+  content: '';
   position: absolute;
   top: 12px;
   left: 4px;
@@ -1220,7 +1258,7 @@ export default {
   .vicp-range
   .vicp-icon5::before {
   position: absolute;
-  content: "";
+  content: '';
   display: block;
   left: 3px;
   top: 8px;
@@ -1245,7 +1283,7 @@ export default {
   .vicp-range
   .vicp-icon6::before {
   position: absolute;
-  content: "";
+  content: '';
   display: block;
   left: 3px;
   top: 8px;
@@ -1261,7 +1299,7 @@ export default {
   .vicp-range
   .vicp-icon6::after {
   position: absolute;
-  content: "";
+  content: '';
   display: block;
   top: 3px;
   left: 8px;
@@ -1275,7 +1313,7 @@ export default {
   .vicp-crop
   .vicp-crop-left
   .vicp-range
-  input[type="range"] {
+  input[type='range'] {
   display: block;
   padding-top: 5px;
   margin: 0 auto;
@@ -1298,7 +1336,7 @@ export default {
   .vicp-crop
   .vicp-crop-left
   .vicp-range
-  input[type="range"]:focus {
+  input[type='range']:focus {
   outline: none;
 }
 .vue-image-crop-upload
@@ -1307,7 +1345,7 @@ export default {
   .vicp-crop
   .vicp-crop-left
   .vicp-range
-  input[type="range"]::-webkit-slider-thumb {
+  input[type='range']::-webkit-slider-thumb {
   -webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.18);
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.18);
   -webkit-appearance: none;
@@ -1327,7 +1365,7 @@ export default {
   .vicp-crop
   .vicp-crop-left
   .vicp-range
-  input[type="range"]::-moz-range-thumb {
+  input[type='range']::-moz-range-thumb {
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.18);
   -moz-appearance: none;
   appearance: none;
@@ -1345,7 +1383,7 @@ export default {
   .vicp-crop
   .vicp-crop-left
   .vicp-range
-  input[type="range"]::-ms-thumb {
+  input[type='range']::-ms-thumb {
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.18);
   appearance: none;
   width: 12px;
@@ -1362,7 +1400,7 @@ export default {
   .vicp-crop
   .vicp-crop-left
   .vicp-range
-  input[type="range"]:active::-moz-range-thumb {
+  input[type='range']:active::-moz-range-thumb {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);
   width: 14px;
   height: 14px;
@@ -1373,7 +1411,7 @@ export default {
   .vicp-crop
   .vicp-crop-left
   .vicp-range
-  input[type="range"]:active::-ms-thumb {
+  input[type='range']:active::-ms-thumb {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);
   width: 14px;
   height: 14px;
@@ -1384,7 +1422,7 @@ export default {
   .vicp-crop
   .vicp-crop-left
   .vicp-range
-  input[type="range"]:active::-webkit-slider-thumb {
+  input[type='range']:active::-webkit-slider-thumb {
   -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);
   margin-top: -4px;
@@ -1397,7 +1435,7 @@ export default {
   .vicp-crop
   .vicp-crop-left
   .vicp-range
-  input[type="range"]::-webkit-slider-runnable-track {
+  input[type='range']::-webkit-slider-runnable-track {
   -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);
   width: 100%;
@@ -1413,7 +1451,7 @@ export default {
   .vicp-crop
   .vicp-crop-left
   .vicp-range
-  input[type="range"]::-moz-range-track {
+  input[type='range']::-moz-range-track {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);
   width: 100%;
   height: 6px;
@@ -1428,7 +1466,7 @@ export default {
   .vicp-crop
   .vicp-crop-left
   .vicp-range
-  input[type="range"]::-ms-track {
+  input[type='range']::-ms-track {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);
   width: 100%;
   cursor: pointer;
@@ -1445,7 +1483,7 @@ export default {
   .vicp-crop
   .vicp-crop-left
   .vicp-range
-  input[type="range"]::-ms-fill-lower {
+  input[type='range']::-ms-fill-lower {
   background-color: rgba(68, 170, 119, 0.3);
 }
 .vue-image-crop-upload
@@ -1454,7 +1492,7 @@ export default {
   .vicp-crop
   .vicp-crop-left
   .vicp-range
-  input[type="range"]::-ms-fill-upper {
+  input[type='range']::-ms-fill-upper {
   background-color: rgba(68, 170, 119, 0.15);
 }
 .vue-image-crop-upload
@@ -1463,7 +1501,7 @@ export default {
   .vicp-crop
   .vicp-crop-left
   .vicp-range
-  input[type="range"]:focus::-webkit-slider-runnable-track {
+  input[type='range']:focus::-webkit-slider-runnable-track {
   background-color: rgba(68, 170, 119, 0.5);
 }
 .vue-image-crop-upload
@@ -1472,7 +1510,7 @@ export default {
   .vicp-crop
   .vicp-crop-left
   .vicp-range
-  input[type="range"]:focus::-moz-range-track {
+  input[type='range']:focus::-moz-range-track {
   background-color: rgba(68, 170, 119, 0.5);
 }
 .vue-image-crop-upload
@@ -1481,7 +1519,7 @@ export default {
   .vicp-crop
   .vicp-crop-left
   .vicp-range
-  input[type="range"]:focus::-ms-fill-lower {
+  input[type='range']:focus::-ms-fill-lower {
   background-color: rgba(68, 170, 119, 0.45);
 }
 .vue-image-crop-upload
@@ -1490,7 +1528,7 @@ export default {
   .vicp-crop
   .vicp-crop-left
   .vicp-range
-  input[type="range"]:focus::-ms-fill-upper {
+  input[type='range']:focus::-ms-fill-upper {
   background-color: rgba(68, 170, 119, 0.25);
 }
 .vue-image-crop-upload .vicp-wrap .vicp-step2 .vicp-crop .vicp-crop-right {
@@ -1645,7 +1683,7 @@ export default {
   .vicp-upload
   .vicp-progress-wrap
   .vicp-progress::after {
-  content: "";
+  content: '';
   position: absolute;
   display: block;
   top: -3px;
@@ -1722,7 +1760,7 @@ export default {
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
-  content: "";
+  content: '';
 }
 .vue-image-crop-upload .vicp-wrap .vicp-icon2 {
   position: relative;
@@ -1733,7 +1771,7 @@ export default {
 }
 .vue-image-crop-upload .vicp-wrap .vicp-icon2::after,
 .vue-image-crop-upload .vicp-wrap .vicp-icon2::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 9px;
   left: 4px;
