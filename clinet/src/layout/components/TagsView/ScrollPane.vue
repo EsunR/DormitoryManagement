@@ -83,7 +83,7 @@ export default {
   position: relative;
   overflow: hidden;
   width: 100%;
-  >>> {
+  ::v-deep {
     .el-scrollbar__bar {
       bottom: 0px;
     }

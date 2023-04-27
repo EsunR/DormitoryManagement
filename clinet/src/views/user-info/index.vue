@@ -139,7 +139,7 @@ export default {
   display: flex;
   justify-content: space-between;
 }
->>> .el-tabs__content {
+::v-deep .el-tabs__content {
   padding: 40px 20px;
   width: 100%;
 }
