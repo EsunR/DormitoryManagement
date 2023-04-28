@@ -209,7 +209,7 @@ Koa 中间件，详见 Koa 中间件机制。
 
 # 5. 项目启用方式
 
-首先安装 nodejs 与 npm 环境。
+首先安装 nodejs 与 npm 环境，建议 Node 16 版本
 
 ## 5.1 运行后台
 
@@ -221,9 +221,11 @@ Koa 中间件，详见 Koa 中间件机制。
 
 将 `dormitory.sql` 文件写入该表，完成数据初始化。
 
-修改 `/server/src/config.js` 文件下的数据库地址、用户名、密码。
+~~修改 `/server/src/config.js` 文件下的数据库地址、用户名、密码。~~
 
-使用 cmd 或其他命令行工具移动至 server 目录下，运行：
+复制 `server/.env.template` 重命名为 `.env`，修改相关配置
+
+使用命令行工具移动至 server 目录下，运行：
 
 ```js
 ## 安装依赖
