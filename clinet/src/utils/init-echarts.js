@@ -1,4 +1,4 @@
-import { BarChart, LineChart } from 'echarts/charts'
+import { BarChart, LineChart, PieChart } from 'echarts/charts'
 import {
   DataZoomComponent,
   GridComponent,
@@ -17,6 +17,7 @@ export function initEcharts() {
     // chart
     LineChart,
     BarChart,
+    PieChart,
     // component
     GridComponent,
     TitleComponent,
