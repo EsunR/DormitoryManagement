@@ -11,6 +11,13 @@
         >获取数据</el-button
       >
     </div>
+
+    <h1 class="main-title">统计信息</h1>
+    <div class="main-card wrapper">
+      <span v-if="selectedBuildingId === null">请选择宿舍楼</span>
+      <statistic-info v-else :buildingId="selectedBuildingId" />
+    </div>
+
     <h1 class="main-title">楼层信息</h1>
     <div class="list-wrapper">
       <div class="main-card" v-if="floorsData.length === 0">
@@ -29,6 +36,7 @@
 <script>
 import GroupSelector from '@/components/GroupSelector'
 import FloorInfoCard from './components/FloorInfoCard'
+import StatisticInfo from './components/StatisticInfo.vue'
 import { getCleanerTableData } from '@/api/building'
 
 import { getFloorsDetail } from '@/api/floor'
@@ -36,13 +44,15 @@ export default {
   name: 'floorManage',
   components: {
     GroupSelector,
-    FloorInfoCard
+    FloorInfoCard,
+    StatisticInfo
   },
   data() {
     return {
       selectorData: {
         buildingId: null
       },
+      selectedBuildingId: null,
       floorsData: [],
       cleanersData: []
     }
@@ -59,6 +69,7 @@ export default {
       })
     },
     handleSubmitClick() {
+      this.selectedBuildingId = this.selectorData.buildingId
       this.fetchFloorData()
       this.fetchCleanersData()
     }

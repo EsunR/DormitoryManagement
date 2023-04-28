@@ -69,3 +69,11 @@ export function getCleanerTableData(buildingId) {
     params: { buildingId }
   })
 }
+
+export function getBuildingStatistic(buildingId) {
+  return request({
+    url: '/building/getStatistic',
+    method: 'get',
+    params: { buildingId }
+  })
+}

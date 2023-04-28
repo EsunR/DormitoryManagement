@@ -69,6 +69,7 @@ router.use("/api/room", require("./routes/room_router"))
 router.use("/api/evaluate", require("./routes/evaluate_router"))
 router.use("/api/record", require("./routes/record_router"))
 router.use("/api/cleaner", require("./routes/cleaner_router"))
+router.use("/api/faculty", require("./routes/faculty_router"))
 
 app.use(router.routes())
 

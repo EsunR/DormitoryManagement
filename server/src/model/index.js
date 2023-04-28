@@ -8,5 +8,7 @@ module.exports = {
   Floor: require("./floor_model"),
   Building: require("./building_model"),
   Cleaner: require("./cleaner_model"),
-  Evaluate: require("./evaluate_model")
+  Evaluate: require("./evaluate_model"),
+  Major: require("./major_model"),
+  Faculty: require("./faculty_model")
 }

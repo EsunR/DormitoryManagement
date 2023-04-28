@@ -17,7 +17,7 @@ const databaseConfig = {
   user: process.env.DB_USER || "root",
   password: process.env.DB_PASSWORD || "root",
   name: "dormitory",
-  rebuild: false, // 是否每次重启服务器时重建数据库
+  rebuild: process.env.DB_REBUILD ? JSON.parse(process.env.DB_REBUILD) : false, // 是否每次重启服务器时重建数据库
   logging: process.env.NODE_ENV === 'development' // 是否再控制台输出建表语句
 }
 

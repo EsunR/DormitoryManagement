@@ -1,5 +1,7 @@
+const moment = require("moment")
 const { databaseConfig } = require("../config")
 const db = require("./index")
+const { FACULTY_MAJOR_DATA } = require("./constance")
 const User = require("../model/user_model")
 const Token = require("../model/token_model")
 const CleanRecord = require("../model/cleanRecord_model")
@@ -10,6 +12,8 @@ const Floor = require("../model/floor_model")
 const Building = require("../model/building_model")
 const Cleaner = require("../model/cleaner_model")
 const Evaluate = require("../model/evaluate_model")
+const Faculty = require("../model/faculty_model")
+const Major = require("../model/major_model")
 
 // 创建表关系
 User.hasMany(Token)
@@ -53,43 +57,61 @@ Building.hasMany(Cleaner)
 Building.belongsToMany(User, { as: "Admins", through: "admins" })
 User.belongsToMany(Building, { as: "", through: "admins" })
 
+Faculty.hasMany(Major)
+User.belongsTo(Faculty)
+User.belongsTo(Major)
+
 // 生成默认数据
 const { hash } = require("../utils/bcypt")
 async function createDefaultData() {
-  // 创建一个学生用户
-  const student = await User.create({
-    account: "123456",
+  // 添加院系与专业
+  FACULTY_MAJOR_DATA.map(async item => {
+    const faculty = await Faculty.create({
+      name: item.faculty
+    })
+    item.majors.map(async m => {
+      await Major.create({
+        name: m,
+        facultyId: faculty.id
+      })
+    })
+  })
+
+  // 创建一个新用户
+  const user = await User.create({
+    account: "test",
     password: hash("123456"),
     role: "student"
   })
+
   // 创建一个管理员用户
   const admin = await User.create({
     account: "admin",
     password: hash("123456"),
     role: "admin",
-    name: "王晓鹏"
+    name: "王磊"
   })
   // 创建一个超级管理员用户
   const superAdmin = await User.create({
     account: "superAdmin",
     password: hash("123456"),
     role: "superAdmin",
-    name: "李达康"
+    name: "李明"
   })
 
   // 创建宿舍楼
   const building = await Building.createBuilding({
-    name: "通天苑"
+    name: "梧桐苑"
   })
   await Building.createBuilding({
-    name: "大西门"
+    name: "紫藤苑"
   })
   // 将创建的宿舍楼与 admin 做关联
   await Building.addAdmin(building.id, admin.id)
 
   // 创建保洁员
   const cleaner = await Cleaner.createCleaner({
-    name: "凉风阿姨",
+    name: "王阿姨",
     phone: "13822222222"
   })
   // 为宿舍楼添加保洁员
@@ -114,33 +136,62 @@ async function createDefaultData() {
     floorId: floor.id,
     buildingId: floor.buildingId
   })
+
   // 为宿舍添加多个学生
-  await User.create({
-    account: "111111",
+  const student_1 = await User.create({
+    account: "student1",
     password: hash("123456"),
-    name: "哇水水",
+    name: "刘涛",
     role: "student",
     phone: "123456789011",
     roomId: room.id,
-    checkTime: new Date()
+    checkTime: new Date(),
+    sex: 0,
+    facultyId: 1,
+    majorId: 1
   })
-  await User.create({
-    account: "222222",
+  const student_2 = await User.create({
+    account: "student2",
     password: hash("123456"),
-    name: "王大拿",
+    name: "陈华",
     role: "student",
     phone: "123456789011",
     roomId: room.id,
-    checkTime: new Date()
+    checkTime: new Date(),
+    sex: 0,
+    facultyId: 1,
+    majorId: 1
   })
 
   // 创建评价
   const evaluate = await Evaluate.createEvaluate({
     score: 98,
-    note: "宿舍不错",
+    note: "宿舍不错，干净又卫生",
     userId: admin.id,
     roomId: room.id
   })
+
+  // 添加打卡记录
+  for (let i = 0; i < 35; i++) {
+    GetupRecord.create({
+      userId: student_1.id,
+      roomId: room.id,
+      createdAt: moment()
+        .add(-i, "days")
+        .hour(parseInt(Math.random() * 4 + 6))
+        .minute(parseInt(Math.random() * 60))
+        .toDate()
+    })
+    GetupRecord.create({
+      userId: student_2.id,
+      roomId: room.id,
+      createdAt: moment()
+        .add(-i, "days")
+        .hour(parseInt(Math.random() * 4 + 6))
+        .minute(parseInt(Math.random() * 60))
+        .toDate()
+    })
+  }
 }
 
 module.exports = function() {

@@ -72,15 +72,17 @@ router.get("/info", async ctx => {
 
 router.post("/updateInfo", async ctx => {
   const { userId } = ctx.state.user
-  const resbody = ctx.request.body
+  const reqBody = ctx.request.body
   const user = await User.findOne({ where: { id: userId } })
-  for (let key in resbody) {
-    if (user[key] !== undefined && resbody[key]) {
-      user[key] = resbody[key]
+  for (let key in reqBody) {
+    console.log(key)
+    console.log(Object.hasOwnProperty.call(user.toJSON(), key))
+    if (Object.hasOwnProperty.call(user.toJSON(), key) && reqBody[key]) {
+      user[key] = reqBody[key]
     }
   }
-  if (resbody.password) {
-    user.password = bcypt.hash(resbody.password)
+  if (reqBody.password) {
+    user.password = bcypt.hash(reqBody.password)
   }
   ctx.body = new ResBody({ data: await user.save() })
 })

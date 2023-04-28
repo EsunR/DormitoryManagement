@@ -25,12 +25,24 @@ export function getInfo() {
 
 export function updateInfo({
   name = null,
+  sex = null,
   phone = null,
   roomId = null,
   checkTime = null,
-  password = null
+  password = null,
+  facultyId = null,
+  majorId = null
 }) {
-  const data = { name, phone, roomId, checkTime, password }
+  const data = {
+    name,
+    sex,
+    phone,
+    roomId,
+    checkTime,
+    password,
+    facultyId,
+    majorId
+  }
   return request({
     url: '/user/updateInfo',
     method: 'post',

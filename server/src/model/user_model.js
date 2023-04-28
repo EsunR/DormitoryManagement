@@ -45,6 +45,10 @@ User.init(
     phone: {
       type: DataTypes.STRING
     },
+    sex: {
+      comment: "性别, 0：男, 1：女",
+      type: DataTypes.INTEGER
+    },
     checkTime: {
       comment: "入住宿舍时间",
       type: DataTypes.DATE
