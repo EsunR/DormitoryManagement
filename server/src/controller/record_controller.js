@@ -1,12 +1,4 @@
-const {
-  User,
-  GetupRecord,
-  CleanRecord,
-  BackRecord,
-  Room,
-  Floor,
-  Building
-} = require("../model")
+const { User, GetupRecord, CleanRecord, BackRecord, Room } = require("../model")
 const { Op } = require("sequelize")
 const moment = require("moment")
 const _ = require("lodash")

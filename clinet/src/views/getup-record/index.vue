@@ -18,7 +18,7 @@
     </div>
     <h1 class="main-title">折线图表</h1>
     <div class="botttom-wrapper">
-      <div class="chart-wrapper">
+      <div class="chart-wrapper" v-loading="chartLoading">
         <Chart :char-data="charData"></Chart>
       </div>
     </div>
@@ -42,7 +42,8 @@ export default {
       btnDisable: true,
       userGetupRecords: [],
       charData: {},
-      days: 7
+      days: 7,
+      chartLoading: false
     }
   },
   computed: {
@@ -100,10 +101,15 @@ export default {
       this.userGetupRecords = records
     })
     // 获取折线图数据
-    getLineChartData({ type: 'getup', roomId: this.roomId }).then(res => {
-      const { charData } = res.data
-      this.charData = charData
-    })
+    this.chartLoading = true
+    getLineChartData({ type: 'getup', roomId: this.roomId })
+      .then(res => {
+        const { charData } = res.data
+        this.charData = charData
+      })
+      .finally(() => {
+        this.chartLoading = false
+      })
   }
 }
 </script>

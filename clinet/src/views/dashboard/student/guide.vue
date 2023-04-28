@@ -6,9 +6,18 @@
       <h4>看起来您是第一是使用该系统，先填写个人信息吧！</h4>
     </div>
     <!-- Form -->
-    <el-form class="form" :model="form" ref="form">
+    <el-form class="form" :model="form" ref="form" label-position="top">
       <el-form-item label="学生姓名" prop="name" :required="true">
         <el-input v-model="form.name"></el-input>
+      </el-form-item>
+      <el-form-item label="性别" prop="sex" :required="true">
+        <el-radio-group v-model="form.sex">
+          <el-radio :label="0">男</el-radio>
+          <el-radio :label="1">女</el-radio>
+        </el-radio-group>
+      </el-form-item>
+      <el-form-item label="院系/专业" prop="facultyWithMajor" :required="true">
+        <major-selector v-model="form.facultyWithMajor"></major-selector>
       </el-form-item>
       <el-form-item label="联系电话" prop="phone" :required="true">
         <el-input v-model="form.phone"></el-input>
@@ -26,19 +35,23 @@
 
 <script>
 import RoomSelector from '@/components/RoomSelector/index'
+import MajorSelector from '@/components/MajorSelector'
 import { updateInfo } from '@/api/user'
 
 export default {
   name: 'student-guide',
   components: {
-    RoomSelector
+    RoomSelector,
+    MajorSelector
   },
   data() {
     return {
       form: {
         name: '',
+        sex: 0,
         phone: '',
-        roomId: null
+        roomId: null,
+        facultyWithMajor: null
       },
       buildingId: null,
       floorId: null
@@ -81,8 +94,11 @@ export default {
       return new Promise((resolve, reject) => {
         updateInfo({
           name: this.form.name,
+          sex: this.form.sex,
           phone: this.form.phone,
           roomId: this.form.roomId,
+          facultyId: this.form.facultyWithMajor[0],
+          majorId: this.form.facultyWithMajor[1],
           checkTime: new Date().valueOf()
         })
           .then(() => {

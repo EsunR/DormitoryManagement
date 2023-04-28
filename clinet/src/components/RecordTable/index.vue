@@ -4,7 +4,7 @@
       <i v-if="icon" class="icon" :class="icon"></i> {{ title }}
     </div>
     <div class="table-wrapper">
-      <el-table :data="tableData" style="width: 100%">
+      <el-table :data="tableData" style="width: 100%" v-loading="tableLoading">
         <el-table-column label="姓名">
           <template slot-scope="scope">
             <a @click="gotoStudentInfo(scope.row.userId)">{{
@@ -53,32 +53,11 @@ export default {
   props: {
     tableData: {
       type: Array,
-      default: () => [
-        {
-          id: 0,
-          account: '测试',
-          role: 'student',
-          name: '测试',
-          phone: '123456789011',
-          checkTime: '2020-02-15T14:34:55.000Z',
-          createdAt: '2020-02-19T14:12:22.000Z',
-          updatedAt: '2020-02-19T22:12:54.000Z',
-          roomId: 1,
-          roomNumber: 101,
-          floorId: 1,
-          floorLayer: 1,
-          buildingId: 1,
-          buildingName: '通天苑',
-          getupProb: '0.0000',
-          backProb: '0.1667',
-          cleanProb: '0.1667',
-          deletedAt: null,
-          userId: 4,
-          time: '22:12',
-          date: '2020-02-19',
-          early: null
-        }
-      ]
+      default: () => []
+    },
+    tableLoading: {
+      type: Boolean,
+      default: false
     },
     title: {
       type: String

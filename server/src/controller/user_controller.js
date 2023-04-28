@@ -18,6 +18,8 @@ module.exports = {
     const getupProb = await RecordController.getUserProbability("getup", userId)
     const backProb = await RecordController.getUserProbability("back", userId)
     const cleanProb = await RecordController.getUserProbability("clean", userId)
+    const facultyName = await student.getFaculty().then(faculty => faculty.name)
+    const majorName = await student.getMajor().then(major => major.name)
     const info = Object.assign(student.dataValues, {
       roomNumber: room.number,
       floorId: floor.id,
@@ -26,7 +28,9 @@ module.exports = {
       buildingName: building.name,
       getupProb,
       backProb,
-      cleanProb
+      cleanProb,
+      facultyName,
+      majorName
     })
     return info
   },

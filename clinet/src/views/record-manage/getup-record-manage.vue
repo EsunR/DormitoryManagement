@@ -7,7 +7,11 @@
     <!-- 记录详情 -->
     <h1 class="main-title">记录详情</h1>
     <div class="main-card wrapper">
-      <RecordTable :tableData="tableData" type="getup" />
+      <RecordTable
+        :tableData="tableData"
+        :tableLoading="tableLoading"
+        type="getup"
+      />
       <Pagination
         :total="count"
         :page="current"
@@ -39,7 +43,8 @@ export default {
       current: 1,
       count: 0,
       step: 10,
-      tableData: []
+      tableData: [],
+      tableLoading: false
     }
   },
   methods: {
@@ -52,10 +57,15 @@ export default {
       const params = deepClone(this.searchOption)
       params.current = this.current
       params.step = this.step
-      getRecordTableData('getup', params).then(res => {
-        this.tableData = res.data.rows
-        this.count = res.data.count
-      })
+      this.tableLoading = true
+      getRecordTableData('getup', params)
+        .then(res => {
+          this.tableData = res.data.rows
+          this.count = res.data.count
+        })
+        .finally(() => {
+          this.tableLoading = false
+        })
     },
     handlePagination({ page, limit }) {
       this.current = page

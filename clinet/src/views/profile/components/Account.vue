@@ -1,9 +1,18 @@
 <template>
-  <el-form>
+  <el-form label-position="top">
     <el-form-item label="用户名">
       <el-input v-model.trim="name" />
     </el-form-item>
-    <el-form-item label="手机号">
+    <el-form-item label="性别">
+      <el-radio-group v-model="sex">
+        <el-radio :label="0">男</el-radio>
+        <el-radio :label="1">女</el-radio>
+      </el-radio-group>
+    </el-form-item>
+    <el-form-item label="院系/专业" v-if="(roles || []).includes('student')">
+      <major-selector v-model="facultyWithMajor"></major-selector>
+    </el-form-item>
+    <el-form-item label="联系电话">
       <el-input v-model.trim="phone" />
     </el-form-item>
     <el-form-item label="新密码">
@@ -20,22 +29,31 @@
 
 <script>
 import { updateInfo } from '@/api/user'
+import MajorSelector from '@/components/MajorSelector'
+
 export default {
+  components: {
+    MajorSelector
+  },
   data() {
     return {
       name: '',
+      sex: 0,
       phone: '',
+      facultyWithMajor: null,
       password: ''
     }
   },
   methods: {
     submit() {
-      let formData = {
+      updateInfo({
         name: this.name,
+        sex: this.sex,
         password: this.password,
-        phone: this.phone
-      }
-      updateInfo(formData).then(() => {
+        phone: this.phone,
+        facultyId: this.facultyWithMajor[0],
+        majorId: this.facultyWithMajor[1]
+      }).then(() => {
         this.$message({
           type: 'success',
           message: '修改成功!'
@@ -49,6 +67,16 @@ export default {
   mounted() {
     this.name = this.$store.getters.allUserInfo.name
     this.phone = this.$store.getters.allUserInfo.phone
+    this.sex = this.$store.getters.allUserInfo.sex
+    this.facultyWithMajor = [
+      this.$store.getters.allUserInfo.facultyId,
+      this.$store.getters.allUserInfo.majorId
+    ]
+  },
+  computed: {
+    roles: function() {
+      return this.$store.getters.roles
+    }
   }
 }
 </script>

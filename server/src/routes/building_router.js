@@ -128,4 +128,52 @@ router.del("/removeBuildingAdmin", async ctx => {
   ctx.body = new ResBody({ data: { effectRow: result } })
 })
 
+router.get("/getStatistic", async ctx => {
+  const { buildingId } = ctx.request.query
+  // 获取楼中的所有学生数
+  const students = await BuildingController.getStudents(buildingId)
+
+  // 统计专业信息
+  const facultyMap = new Map()
+  const majorMap = new Map()
+  for (let student of students) {
+    const facultyId = student.facultyId
+    const majorId = student.majorId
+    if (facultyMap.has(facultyId)) {
+      facultyMap.set(facultyId, {
+        name: student.facultyName,
+        count: facultyMap.get(facultyId).count + 1
+      })
+    } else {
+      facultyMap.set(facultyId, {
+        name: student.facultyName,
+        count: 1
+      })
+    }
+    if (majorMap.has(majorId)) {
+      majorMap.set(majorId, {
+        name: student.majorName,
+        count: majorMap.get(majorId).count + 1
+      })
+    } else {
+      majorMap.set(majorId, {
+        name: student.majorName,
+        count: 1
+      })
+    }
+  }
+
+  ctx.body = new ResBody({
+    data: {
+      studentCount: students.length,
+      sex: {
+        boysCount: students.filter(item => item.sex === 0).length,
+        girlsCount: students.filter(item => item.sex === 1).length
+      },
+      faculty: Array.from(facultyMap.values()),
+      major: Array.from(majorMap.values())
+    }
+  })
+})
+
 module.exports = router.routes()
