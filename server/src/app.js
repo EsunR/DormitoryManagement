@@ -70,6 +70,7 @@ router.use("/api/evaluate", require("./routes/evaluate_router"))
 router.use("/api/record", require("./routes/record_router"))
 router.use("/api/cleaner", require("./routes/cleaner_router"))
 router.use("/api/faculty", require("./routes/faculty_router"))
+router.use("/api/visitor", require("./routes/visitor_router"))
 
 app.use(router.routes())
 

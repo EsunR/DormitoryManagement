@@ -1,6 +1,11 @@
 <template>
   <div class="FloorInfoCard main-card">
-    <div class="title">楼层：{{ floorInfo.layer }}层</div>
+    <div class="title">
+      <span>楼层：{{ floorInfo.layer }}层</span>
+      <span>|</span>
+      <span>已入住: {{ totalStudentCount }}</span>
+      <span>剩余床位: {{ leftBedCount }}</span>
+    </div>
     <div class="info">
       <div class="left">
         <router-link
@@ -94,6 +99,21 @@ export default {
         })
       }
       this.dialogVisible = false
+    }
+  },
+  computed: {
+    totalPeopleNum() {
+      return this.floorInfo.rooms.reduce((total, room) => {
+        return total + room.peopleNum
+      }, 0)
+    },
+    totalStudentCount() {
+      return this.floorInfo.rooms.reduce((total, room) => {
+        return total + room.studentCount
+      }, 0)
+    },
+    leftBedCount() {
+      return this.totalPeopleNum - this.totalStudentCount
     }
   }
 }

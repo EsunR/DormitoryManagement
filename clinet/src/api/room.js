@@ -15,3 +15,11 @@ export function getRoomInfo(roomId) {
     params: { roomId }
   })
 }
+
+export function updateRoomInfo({ roomId = null, peopleNum = null }) {
+  return request({
+    url: '/room/updateInfo',
+    method: 'post',
+    data: { roomId, peopleNum }
+  })
+}

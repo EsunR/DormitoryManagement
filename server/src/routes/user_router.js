@@ -71,13 +71,21 @@ router.get("/info", async ctx => {
 })
 
 router.post("/updateInfo", async ctx => {
-  const { userId } = ctx.state.user
+  let { userId, role } = ctx.state.user
   const reqBody = ctx.request.body
+  // 如果请求体中有userId，说明是管理员在修改用户信息
+  if (reqBody.userId) {
+    if (role !== "superAdmin") {
+      throw new Error("403-拒绝访问API")
+    }
+    userId = reqBody.userId
+  }
   const user = await User.findOne({ where: { id: userId } })
   for (let key in reqBody) {
-    console.log(key)
-    console.log(Object.hasOwnProperty.call(user.toJSON(), key))
-    if (Object.hasOwnProperty.call(user.toJSON(), key) && reqBody[key]) {
+    if (
+      Object.hasOwnProperty.call(user.toJSON(), key) &&
+      ![undefined, null, ""].includes(reqBody[key])
+    ) {
       user[key] = reqBody[key]
     }
   }

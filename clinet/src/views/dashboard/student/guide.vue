@@ -36,7 +36,7 @@
 <script>
 import RoomSelector from '@/components/RoomSelector/index'
 import MajorSelector from '@/components/MajorSelector'
-import { updateInfo } from '@/api/user'
+import { updateUserInfo } from '@/api/user'
 
 export default {
   name: 'student-guide',
@@ -92,7 +92,7 @@ export default {
     },
     submitFormData() {
       return new Promise((resolve, reject) => {
-        updateInfo({
+        updateUserInfo({
           name: this.form.name,
           sex: this.form.sex,
           phone: this.form.phone,

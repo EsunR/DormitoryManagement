@@ -2,7 +2,19 @@
   <div id="RoomInfo" class="page-wrapper">
     <!-- 宿舍基础信息 -->
     <h1 class="main-title">
-      宿舍基础信息
+      <span class="mr-gap">宿舍基础信息</span>
+      <el-button
+        type="primary"
+        icon="el-icon-edit"
+        circle
+        v-if="roomInfo.id"
+        @click="editModalVisible = true"
+      ></el-button>
+      <room-info-edit-modal
+        :visible.sync="editModalVisible"
+        :roomInfo="roomInfo"
+        @update-success="fetchRoomInfo(roomInfo.id)"
+      />
     </h1>
     <div class="wrapper main-card selector-wrapper">
       <GroupSelector :selectorData="selectorData" />
@@ -61,6 +73,7 @@ import GroupSelector from '@/components/GroupSelector'
 import PanelGroup from './components/PanelGroup'
 import StudentsTable from './components/StudentsTable'
 import Evaluates from '../dashboard/student/components/Evaluates'
+import RoomInfoEditModal from './components/RoomInfoEditModal.vue'
 
 import { getRoomInfo } from '@/api/room'
 import { getEvaluates, addEvaluate } from '@/api/evaluate'
@@ -70,7 +83,8 @@ export default {
     GroupSelector,
     PanelGroup,
     StudentsTable,
-    Evaluates
+    Evaluates,
+    RoomInfoEditModal
   },
   data() {
     return {
@@ -87,7 +101,8 @@ export default {
       evaluateForm: {
         note: '',
         score: 60
-      }
+      },
+      editModalVisible: false
     }
   },
   watch: {
@@ -154,6 +169,9 @@ export default {
       display: flex;
       flex-direction: row-reverse;
     }
+  }
+  .mr-gap {
+    margin-right: 16px;
   }
 }
 </style>

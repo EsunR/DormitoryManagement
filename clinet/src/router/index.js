@@ -251,6 +251,24 @@ export const asyncRoutes = [
           noCache: true
         }
       }
+    ],
+  },
+  {
+    path: '/visitorManage',
+    component: Layout,
+    meta: {
+      roles: ['superAdmin']
+    },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/visitor-manage/index'),
+        name: 'visitorManage',
+        meta: {
+          title: '来访人员登记',
+          icon: 'user'
+        }
+      }
     ]
   },
   // 404 页面要在最后引入

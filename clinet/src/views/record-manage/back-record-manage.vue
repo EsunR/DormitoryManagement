@@ -64,7 +64,7 @@ export default {
           this.count = res.data.count
         })
         .finally(() => {
-          this.tableData = false
+          this.tableLoading = false
         })
     },
     handlePagination({ page, limit }) {

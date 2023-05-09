@@ -83,12 +83,18 @@ export default {
             },
             data: [
               {
-                name: '男',
-                value: this.statisticData.maleCount || 0
+                name: '男生',
+                value:
+                  (this.statisticData.sex &&
+                    this.statisticData.sex.boysCount) ||
+                  0
               },
               {
-                name: '女',
-                value: this.statisticData.femaleCount || 0
+                name: '女生',
+                value:
+                  (this.statisticData.sex &&
+                    this.statisticData.sex.girlsCount) ||
+                  0
               }
             ]
           }

@@ -38,4 +38,19 @@ router.get("/getRoomInfo", async ctx => {
   ctx.body = new ResBody({ data: roomInfo })
 })
 
+router.post("/updateInfo", async ctx => {
+  const { roomId } = ctx.request.body
+  const room = await Room.findOne({ where: { id: roomId } })
+  const reqBody = ctx.request.body
+  for (let key in reqBody) {
+    if (
+      Object.hasOwnProperty.call(room.toJSON(), key) &&
+      ![undefined, null, ""].includes(reqBody[key])
+    ) {
+      room[key] = reqBody[key]
+    }
+  }
+  ctx.body = new ResBody({ data: await room.save() })
+})
+
 module.exports = router.routes()

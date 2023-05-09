@@ -10,5 +10,6 @@ module.exports = {
   Cleaner: require("./cleaner_model"),
   Evaluate: require("./evaluate_model"),
   Major: require("./major_model"),
-  Faculty: require("./faculty_model")
+  Faculty: require("./faculty_model"),
+  Visitor: require("./visitor_model")
 }

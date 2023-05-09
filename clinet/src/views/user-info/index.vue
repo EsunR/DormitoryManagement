@@ -29,7 +29,12 @@
       <el-row :gutter="20" class="top">
         <el-col :md="12">
           <div class="userInfo-card">
-            <div class="title">用户信息</div>
+            <div class="title">
+              <span>用户信息</span>
+              <el-button icon="el-icon-guide" @click="editModalVisible = true">
+                调剂宿舍
+              </el-button>
+            </div>
             <hr />
             <div class="info-item">
               <label>姓名:</label>
@@ -87,6 +92,13 @@
       </div>
     </div>
     <div class="no-data-tips main-card wrapper" v-else>请选择用户</div>
+
+    <!-- 调剂宿舍模态框 -->
+    <UserInfoEditModal
+      :visible.sync="editModalVisible"
+      :userInfo="studentInfo"
+      @update-success="() => fetchUserInfo('id', this.studentInfo.id)"
+    />
   </div>
 </template>
 
@@ -94,6 +106,7 @@
 import GroupSelector from '@/components/GroupSelector'
 import StudentSearcher from './components/StudentSearcher'
 import PanelGroup from './components/PanelGroup'
+import UserInfoEditModal from './components/UserInfoEditModal.vue'
 
 import { getStudentInfoByIdOrAccount } from '@/api/user'
 export default {
@@ -101,7 +114,8 @@ export default {
   components: {
     GroupSelector,
     StudentSearcher,
-    PanelGroup
+    PanelGroup,
+    UserInfoEditModal
   },
   data() {
     return {
@@ -112,7 +126,8 @@ export default {
         userId: null
       },
       searchContent: '',
-      studentInfo: {}
+      studentInfo: {},
+      editModalVisible: false
     }
   },
   methods: {
@@ -160,6 +175,9 @@ export default {
         color: $color-primary;
         font-size: 22px;
         margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
       }
       .info-item {
         margin: 20px 0;

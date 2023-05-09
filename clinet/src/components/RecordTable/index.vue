@@ -62,10 +62,6 @@ export default {
     title: {
       type: String
     },
-    showPagination: {
-      type: Boolean,
-      default: true
-    },
     type: {
       type: String,
       required: true
@@ -113,7 +109,6 @@ export default {
   }
 }
 .table-wrapper {
-  padding: 20px;
   background-color: #fff;
   .bdge-wrapp {
     display: flex;
