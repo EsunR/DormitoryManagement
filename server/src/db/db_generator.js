@@ -211,19 +211,13 @@ async function createDefaultData() {
   }
 }
 
-module.exports = function() {
+module.exports = async function (force = false) {
   // 同步表数据
   console.log("DataBase Syncing ... ...")
-  db.sequelize
-    .sync({
-      force: databaseConfig.rebuild
-    })
-    .then(() => {
-      if (databaseConfig.rebuild) {
-        createDefaultData()
-      }
-    })
-    .then(() => {
-      console.log("DataBase Sync done")
-    })
+  await db.sequelize.sync({ force })
+  console.log("DataBase Sync done")
+  if (force) {
+    console.log("DataBase Init ... ...");
+    await createDefaultData()
+  }
 }

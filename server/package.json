@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ./src/app.js",
-    "start": "cross-env NODE_ENV=production node -r dotenv/config ./src/app.js"
+    "start": "cross-env NODE_ENV=production node -r dotenv/config ./src/app.js",
+    "db:init": "cross-env NODE_ENV=development node -r dotenv/config ./src/init_db.js"
   },
   "author": "",
   "license": "ISC",

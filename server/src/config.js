@@ -5,7 +5,7 @@
  */
 const sysConfig = {
   devMode: process.env.NODE_ENV === 'development', // 是否开启开发模式
-  port: 8080,
+  port: process.env.NODE_PORT ? Number(process.env.NODE_PORT) : 8080,
   pwdSaltRound: 10,
   tokenSalt: "awsl",
   tokenExp: 3600 * 24 * 14, // 14 Days 用户单次登录的时长

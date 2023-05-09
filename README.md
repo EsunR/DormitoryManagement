@@ -22,8 +22,9 @@
 代码：
 
 - 支持使用环境变量修改服务端配置，将 `server/.env.template` 重命名为 `.env` 文件即可应用配置
-- 升级 Vue 版本为 2.7.14
-- 升级 echarts，使用 vue-echarts 作为图表组件
+- 升级 Vue 版本为 2.7
+- 升级 echarts，移除 v-charts，使用 vue-echarts 作为 Vue 图表组件
+- 新增 `npm run db:init` 指令，快捷初始化数据库
 
 # 1. 需求分析
 
@@ -238,17 +239,16 @@ Koa 中间件，详见 Koa 中间件机制。
 
 > 如果 mysql 为高版本，选择 utf8mb4
 
-将 `dormitory.sql` 文件写入该表，完成数据初始化。
-
-~~修改 `/server/src/config.js` 文件下的数据库地址、用户名、密码。~~
-
-复制 `server/.env.template` 重命名为 `.env`，修改相关配置
+复制 `server/.env.template` 重命名为 `.env`，修改相关配置。
 
 使用命令行工具移动至 server 目录下，运行：
 
 ```js
 ## 安装依赖
 $ npm install
+
+## 初始化数据库（该指令执行后会强行覆盖数据库中已有的数据，仅运行一次即可！）
+$ npm run db:init
 
 ## 运行项目
 $ npm run serve
@@ -260,6 +260,15 @@ $ npm run serve
 
 浏览器输入 `http://localhost:8080`
 
+预置账号：
+
+- 管理员（admin 123456）
+- 超级管理员（superAdmin 123456）
+- 学生用户1（student1 123456）
+- 学生用户2（student2 123456）
+
+> 初始化的数据可以在 `db_generator.js` 中的 `createDefaultData` 方法中修改
+
 ## 5.2 前端文件
 
 按照上述步骤已经可以正常运行项目，如果需要修改与调试前端页面请按照以下步骤：
@@ -270,6 +279,8 @@ $ npm run serve
 2. 在 `/client` 目录下运行 `npm run dev` 开启前端调试模式
 3. 修改 `/clinet` 目录下的任意文件
 4. 修改完成后，在 `/client` 目录下运行 `npm run build:prod`
+
+> 构建时会出现警告，如 `$weight: Passing a number without unit % (0) is deprecated.` 无视即可，不影响功能
 
 # 6. API 文档
 
