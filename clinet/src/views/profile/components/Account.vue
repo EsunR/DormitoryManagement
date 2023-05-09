@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { updateInfo } from '@/api/user'
+import { updateUserInfo } from '@/api/user'
 import MajorSelector from '@/components/MajorSelector'
 
 export default {
@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     submit() {
-      updateInfo({
+      updateUserInfo({
         name: this.name,
         sex: this.sex,
         password: this.password,

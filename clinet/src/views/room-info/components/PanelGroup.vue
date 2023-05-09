@@ -37,6 +37,8 @@ export default {
   },
   computed: {
     panelData() {
+      const studentsCount = this.roomInfo.users.length
+      const remainingBeds = this.roomInfo.peopleNum - studentsCount
       return [
         {
           icon: 'el-icon-s-home',
@@ -59,8 +61,8 @@ export default {
         {
           icon: 'el-icon-user-solid',
           color: '#34BFA3',
-          title: '宿舍最大人数',
-          content: `${this.roomInfo.peopleNum}`
+          title: '已入住 / 剩余床位',
+          content: `${studentsCount} / ${remainingBeds}`
         }
       ]
     }

@@ -14,6 +14,7 @@ const Cleaner = require("../model/cleaner_model")
 const Evaluate = require("../model/evaluate_model")
 const Faculty = require("../model/faculty_model")
 const Major = require("../model/major_model")
+const Visitor = require("../model/visitor_model")
 
 // 创建表关系
 User.hasMany(Token)
@@ -60,6 +61,8 @@ User.belongsToMany(Building, { as: "", through: "admins" })
 Faculty.hasMany(Major)
 User.belongsTo(Faculty)
 User.belongsTo(Major)
+
+Visitor.belongsTo(Building)
 
 // 生成默认数据
 const { hash } = require("../utils/bcypt")
@@ -109,6 +112,14 @@ async function createDefaultData() {
   // 将创建的宿舍楼与 admin 做关联
   await Building.addAdmin(building.id, admin.id)
 
+  await Visitor.create({
+    name: "张三",
+    phone: "13822222222",
+    idNumber: "123456789012345678",
+    sex: 1,
+    buildingId: building.id
+  })
+
   // 创建保洁员
   const cleaner = await Cleaner.createCleaner({
     name: "王阿姨",
@@ -133,6 +144,12 @@ async function createDefaultData() {
   })
   const room = await Room.createRoom({
     number: 101,
+    floorId: floor.id,
+    buildingId: floor.buildingId
+  })
+
+  Room.createRoom({
+    number: 102,
     floorId: floor.id,
     buildingId: floor.buildingId
   })

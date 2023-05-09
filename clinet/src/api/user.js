@@ -23,7 +23,12 @@ export function getInfo() {
   })
 }
 
-export function updateInfo({
+export function updateUserInfo({
+  /**
+   * 指定修改用户的 ID，只有超级管理员可以传,
+   * 否则只修改当前用户信息
+   */
+  userId = null,
   name = null,
   sex = null,
   phone = null,
@@ -34,6 +39,7 @@ export function updateInfo({
   majorId = null
 }) {
   const data = {
+    userId,
     name,
     sex,
     phone,
@@ -97,7 +103,6 @@ export function getAdminTableData() {
 }
 
 export function getStudentInfoByIdOrAccount({ type = 'id', value }) {
-  console.log('value: ', value)
   return request({
     url: '/user/getStudentInfoByIdOrAccount',
     method: 'get',

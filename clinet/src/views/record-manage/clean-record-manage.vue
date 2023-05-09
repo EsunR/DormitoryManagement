@@ -10,7 +10,7 @@
       <RecordTable
         :tableData="tableData"
         type="clean"
-        :tableLoading="{ tableLoading }"
+        :tableLoading="tableLoading"
       />
       <Pagination
         :total="count"
