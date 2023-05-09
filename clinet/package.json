@@ -1,8 +1,8 @@
 {
-  "name": "vue-element-admin",
+  "name": "dormitory-management",
   "version": "4.2.1",
-  "description": "A magical vue admin. An out-of-box UI solution for enterprise applications. Newest development stack of vue. Lots of awesome features",
-  "author": "Pan <panfree23@gmail.com>",
+  "description": "基于Vue的宿舍管理系统",
+  "author": "EsunR <esunr641@icloud.com>",
   "license": "MIT",
   "scripts": {
     "dev": "vue-cli-service serve",
@@ -37,10 +37,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PanJiaChen/vue-element-admin.git"
+    "url": "git+https://github.com/EsunR/DormitoryManagement.git"
   },
   "bugs": {
-    "url": "https://github.com/PanJiaChen/vue-element-admin/issues"
+    "url": "https://github.com/EsunR/DormitoryManagement/issues"
   },
   "dependencies": {
     "axios": "0.18.1",

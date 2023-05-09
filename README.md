@@ -1,12 +1,20 @@
-# 0. 预览
+> 当前项目处于佛系维护状态，有 bug 可以反馈在 issues 中。如果这个项目拯救了你的毕设或者大作业的话，赏个星星吧。
+
+# 0. 概览
 
 基于 Koa 以及 VueJS 的宿舍管理系统。
 
-线上预览：https://www.esunr.xyz/dormitory
+线上预览：https://www.esunr.xyz/dormitory （临时关闭）
 
-![](http://study.esunr.xyz/1583661197624.jpg)
+![image.png](https://s2.loli.net/2023/05/10/JIvetfP3FLyNZ7w.png)
 
-更新记录：
+![image.png](https://s2.loli.net/2023/05/10/rxhOamY192S5JVX.png)
+
+![image.png](https://s2.loli.net/2023/05/10/GipgY1QOkNFKu9A.png)
+
+![image.png](https://s2.loli.net/2023/05/10/rKuvX6h8losRmQU.png)
+
+## 更新记录：
 
 ### 2023.05.09
 
