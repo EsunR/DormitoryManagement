@@ -281,8 +281,8 @@ $ npm run start
 
 > 首先要确保已经在 `/clinet` 目录下运行过 `npm install` 安装好了前端依赖
 
-1. 在 `/server` 目录下运行 `npm run dev` 开启后台调试模式
-2. 在 `/client` 目录下运行 `npm run dev` 开启前端调试模式
+1. 在 `/server` 目录下运行 `npm run dev` 开启后台开发模式
+2. 在 `/client` 目录下运行 `npm run dev` 开启前端开发模式
 3. 修改 `/clinet` 目录下的任意文件
 4. 修改完成后，在 `/client` 目录下运行 `npm run build:prod`
 
