@@ -35,5 +35,8 @@
     "eslint-plugin-prettier": "^3.1.1",
     "nodemon": "^2.0.22",
     "prettier": "^1.19.1"
+  },
+  "volta": {
+    "node": "16.20.1"
   }
 }

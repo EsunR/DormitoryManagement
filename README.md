@@ -4,15 +4,13 @@
 
 基于 Koa 以及 VueJS 的宿舍管理系统。
 
-线上预览：https://www.esunr.xyz/dormitory （临时关闭）
+![](./demo/screen-shot_01.png)
 
-![image.png](https://s2.loli.net/2023/05/10/JIvetfP3FLyNZ7w.png)
+![](./demo/screen-shot_02.png)
 
-![image.png](https://s2.loli.net/2023/05/10/rxhOamY192S5JVX.png)
+![](./demo/screen-shot_03.png)
 
-![image.png](https://s2.loli.net/2023/05/10/GipgY1QOkNFKu9A.png)
-
-![image.png](https://s2.loli.net/2023/05/10/rKuvX6h8losRmQU.png)
+![](./demo/screen-shot_04.png)
 
 ## 更新记录：
 
@@ -107,7 +105,7 @@
 
 数据库设计一览：
 
-![](./宿舍管理系统.png)
+![](./demo/db-design.png)
 
 # 4. 目录介绍
 
@@ -237,15 +235,15 @@ Koa 中间件，详见 Koa 中间件机制。
 
 # 5. 项目启用方式
 
-首先安装 nodejs 与 npm 环境，建议 Node 16 版本
+预先准备 Node 环境，**避免各种奇怪的问题，建议使用 16.x 版本**，建议[使用 volta 管理 node 版本](https://blog.esunr.xyz/2023/07/d99593770741.html#1-Volta)。
 
 ## 5.1 运行后台
 
 数据库中创建表 "dormitory"（如下为 Navicat 数据库管理工具）：
 
-![](http://img.cdn.esunr.xyz/markdown/20200225211018.png)
+![](./demo/db.png)
 
-> 如果 mysql 为高版本，选择 utf8mb4
+> 如果 mysql 低版本选择 utf8，高版本选择 utf8mb4
 
 复制 `server/.env.template` 重命名为 `.env`，修改相关配置。
 
@@ -259,14 +257,14 @@ $ npm install
 $ npm run db:init
 
 ## 运行项目
-$ npm run serve
+$ npm run start
 ```
 
 看到以下输出，即为成功：
 
-![](http://img.cdn.esunr.xyz/markdown/20200225211508.png)
+![](./demo/server-start.png)
 
-浏览器输入 `http://localhost:8080`
+浏览器访问 `http://localhost:8080`
 
 预置账号：
 
