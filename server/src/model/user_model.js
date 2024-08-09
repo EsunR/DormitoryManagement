@@ -25,7 +25,6 @@ User.init(
     },
     account: {
       type: DataTypes.STRING,
-      primaryKey: true,
       allowNull: false
     },
     password: {
